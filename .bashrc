@@ -138,6 +138,8 @@ alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cb
 alias RRCO="git checkout ReviewRoom-5.0"
 alias APICO="git checkout josh/apiv2"
 alias RCMPFCO="git checkout josh/rcmpf"
+alias GPR="git pull --rebase"
+
 # show current branch
 alias B="git rev-parse --abbrev-ref HEAD"
 
