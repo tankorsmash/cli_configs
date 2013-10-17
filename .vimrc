@@ -39,13 +39,16 @@ map  :update
 "
 set relativenumber
 
+let g:sparkupNextMapping = '<Leader><c-i>'
+
 set tags=./tags;/
 
 set autoread
 set ignorecase
 set smartcase
 set gdefault
-set nohlsearch
+" set nohlsearch
+set hlsearch
 set visualbell
 
 set lazyredraw
@@ -55,7 +58,7 @@ set nowrap
 
 "gui stuff, last one is the default
 set guioptions=ac
-"set guioptions=egmrLtT
+" set guioptions=egmrLtT
 
 "set thesaurus+=C:\Users\Mark\Documents\Thesaurus\mthesaur.txt
 
@@ -149,6 +152,7 @@ noremap <f3> :NERDTreeToggle<cr>
 
 " MRU plugin
 let MRU_Max_Entries = 10000
+let MRU_Exclude_Files = '.*fugitiveblame.*' 
 
 "full screen
 " map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR> 
@@ -186,10 +190,11 @@ noremap <Leader>S :set smartindent<cr>
 
 noremap <Leader>x :!ctags %<cr><cr>
 
-noremap <Leader>m :make %
-noremap <Leader>q :!./a.out
+" noremap <Leader>m :make %
+" noremap <Leader>q :!./a.out
 
 noremap <Leader>l :ls<cr>
+noremap <Leader>t :e ~/chideit/apps/chide/products/reviewroom/tests/__init__.py<cr>
 " override windows redo, back to scroll up.
 noremap <c-y> <c-y>
 
@@ -215,30 +220,30 @@ autocmd BufEnter * silent! lcd %:p:h
 
 "end custom
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+" set diffexpr=MyDiff()
+" function MyDiff()
+"   let opt = '-a --binary '
+"   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+"   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+"   let arg1 = v:fname_in
+"   if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+"   let arg2 = v:fname_new
+"   if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+"   let arg3 = v:fname_out
+"   if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+"   let eq = ''
+"   if $VIMRUNTIME =~ ' '
+"     if &sh =~ '\<cmd'
+"       let cmd = '""' . $VIMRUNTIME . '\diff"'
+"       let eq = '"'
+"     else
+"       let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+"     endif
+"   else
+"     let cmd = $VIMRUNTIME . '\diff'
+"   endif
+"   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+" endfunction
 
 "here is a more exotic version of my original Kwbd script
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
@@ -320,6 +325,8 @@ else
   endif
 endif
 
+let g:cssColorVimDoNotMessMyUpdatetime = 1
+
 "powerline stuff
 set laststatus=2
 set encoding=utf-8 " Necessary to show Unicode glyphs
@@ -368,9 +375,15 @@ let g:pymode_utils_whitespaces = 0
 
 " ctrlP stuff
 let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_lazy_update = 350
+let g:ctrlp_lazy_update = 100 "350 0
+" let g:ctrlp_user_command = "ack -f %s"
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_custom_ignore = ".*.pyc$"
 let g:ctrlp_max_files = 100000
+
+" fugitive stuff
+nnoremap <Leader>gs :Gstatus
+nnoremap <Leader>gb :Gblame
 
 set noexpandtab
 
@@ -396,10 +409,14 @@ nnoremap <silent> <c-]> :call MatchCaseTag()<CR>
 map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
 map <Leader>j :e /home/joshb/misc/vim/macros.vim
 
-cmap w!! w !sudo tee %
+"let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+"                            \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
+let g:ctrlp_extensions = ['tag']
 set showcmd
 
-set foldlevel=20
+" set foldlevel=20
 
 let g:ctrlp_custom_ignore = ".*\/c\/.*"
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete

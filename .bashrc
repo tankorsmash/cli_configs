@@ -54,11 +54,16 @@ fi
 
 source ~/.git-prompt.sh
 
+NOW=$(date +"%m")
+
 if [ "$color_prompt" = yes ]; then
     # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 	# export PS1="\e[0;34m\w\e[m$"
 	# export PS1="\n[\[\033[32m\]\w]\[\033[0m\]\n\t \$(__git_ps1) \[\033[1;36m\]\u\[\033[1;33m\]-> \[\033[0m\] "
-	export PS1="\n[\[\033[32m\]\w\[\033[0m\]]\n\t\$(__git_ps1) \[\033[1;36m\]\u\[\033[1;33m\]-> \[\033[0m\] "
+	PROMPT_ERR='$(if [[ $? = 0 ]]; then echo -ne "( ͡° ͜ʖ ͡°)"; else echo -ne "( ͡°_ʖ ͡°)"; fi;)'
+	export PS1="\n[\[\033[32m\]\w\[\033[0m\]]	$PROMPT_ERR\n\t\$(__git_ps1) \[\033[1;36m\]\u\[\033[1;33m\]-> \[\033[0m\] "
+
+
 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -121,13 +126,22 @@ alias BUNDLE="cd ~/.vim/bundle/"
 alias APID="cd ~/chideit/apps/chide/products/reviewroom/api/apiv2/"
 
 # launching django #
+alias LAUNCHRR="google-chrome http://test.myreviewroom.dev:8080/admin/dashboard/"
+alias LAUNCHVIM="gvim"
+alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
 alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus"
-alias LAUNCHVINNY="gnome-terminal --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
+alias LAUNCHVINNY="gnome-terminal --window-with-profile=server  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
 alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x python ~/chideit/reviewroom/project/manage.py runserver 0.0.0.0:8080"
-alias LAUNCHBOTH="LAUNCHVINNY;LAUNCHSERVER"
+alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
+alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608"
+
+alias LAUNCHCF=LAUNCHCAMPFIRE
 alias LB=LAUNCHBOTH
 alias LSP=LAUNCHSP
-alias API="python ~/chideit/apps/chide/products/reviewroom/api/apiv2/apiv2_fooling.py"
+alias LSER=LAUNCHSERVER
+# alias HELLO="LAUNCHVIM; LAUNCHACK; LSP; LAUNCHB;"
+
+alias API2="python ~/chideit/apps/chide/products/reviewroom/api/apiv2/apiv2_fooling.py"
 alias API1="python ~/chideit/apps/chide/products/reviewroom/api/api_fooling.py"
 
 # git logging #
@@ -149,6 +163,10 @@ alias APIUSER="~/chideit/reviewroom/project/manage.py test reviewroom.UserResour
 alias APITEAM="~/chideit/reviewroom/project/manage.py test reviewroom.TeamResourceTest"
 alias APISUB="~/chideit/reviewroom/project/manage.py test reviewroom.SubmissionResourceTest"
 alias APIALL="~/chideit/reviewroom/project/manage.py test reviewroom"
+alias TEST="~/chideit/reviewroom/project/manage.py test reviewroom"
+function TESTF() { ~/chideit/reviewroom/project/manage.py test reviewroom."$@" ;} 
+alias TESt=TEST
+alias TEst=TEST
 
 #show modified files
 alias LS="git ls-files -m"
@@ -168,7 +186,7 @@ alias Q="QUAKE"
 alias sl="sl -ale"
 
 # fix resolution
-alias FIXRES="xrandr --output HDMI1 --mode  1920x1080 --right-of VGA1 --output VGA1 --mode 1680x1050"
+alias FIXRES="xrandr --output HDMI1 --mode  1920x1080 --right-of VGA1 --output VGA1 --mode 1920x1080"
 
 title(){
 	   # echo -en "\033]0;$1\a"
@@ -176,6 +194,8 @@ title(){
    }
 # function gvim () { (/usr/bin/gvim -f --remote-silent "$@" &) }
 PRO
+
+. ~/django/extras/django_bash_completion
 
 # multiline history #
 shopt -s cmdhist
