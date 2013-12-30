@@ -46,6 +46,7 @@ set tags=./tags;/
 set autoread
 set ignorecase
 set smartcase
+set infercase
 set gdefault
 " set nohlsearch
 set hlsearch
@@ -174,7 +175,7 @@ let mapleader = ","
 "map keys for next and prev buffer
 noremap <Leader>n :bn
 noremap <Leader>p :bp
-noremap <Leader>d :pwd
+noremap <Leader>d :e ~/chideit/reviewroom/project/debug.log
 
 " noremap <Leader>c :lcd %:p:h
 noremap <Leader>l :ls
@@ -194,7 +195,10 @@ noremap <Leader>x :!ctags %<cr><cr>
 " noremap <Leader>q :!./a.out
 
 noremap <Leader>l :ls<cr>
-noremap <Leader>t :e ~/chideit/apps/chide/products/reviewroom/tests/__init__.py<cr>
+noremap <Leader>ti :e ~/chideit/apps/chide/products/reviewroom/tests/__init__.py<cr>
+noremap <Leader>tc :tabc<cr>
+noremap <Leader>te :tabe<cr>
+
 " override windows redo, back to scroll up.
 noremap <c-y> <c-y>
 
@@ -420,3 +424,6 @@ set showcmd
 let g:ctrlp_custom_ignore = ".*\/c\/.*"
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %

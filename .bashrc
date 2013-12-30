@@ -130,7 +130,7 @@ alias LAUNCHRR="google-chrome http://test.myreviewroom.dev:8080/admin/dashboard/
 alias LAUNCHVIM="gvim"
 alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
 alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus"
-alias LAUNCHVINNY="gnome-terminal --window-with-profile=server  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
+alias LAUNCHVINNY="gnome-terminal --window-with-profile=vinny  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
 alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x python ~/chideit/reviewroom/project/manage.py runserver 0.0.0.0:8080"
 alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
 alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608"
@@ -156,6 +156,13 @@ alias GPR="git pull --rebase"
 
 # show current branch
 alias B="git rev-parse --abbrev-ref HEAD"
+
+# ctags
+alias CT="PRO; ctags -R; cd -"
+
+# compilemessages with highlighting on the lang key
+alias COMPILE="./compilemessages.sh &> /tmp/temp.txt;sed -s 's/^\(\/.*locale\/\)\(.*\)\(\/LC_MESSA.*\)/\1\x1b[0;34m\2\x1b[0m\3/' /tmp/temp.txt"
+
 
 # testing
 alias APITASK="~/chideit/reviewroom/project/manage.py test reviewroom.TaskResourceTest"
@@ -188,6 +195,9 @@ alias sl="sl -ale"
 # fix resolution
 alias FIXRES="xrandr --output HDMI1 --mode  1920x1080 --right-of VGA1 --output VGA1 --mode 1920x1080"
 
+#remove .pycs 
+alias FIXPYCs="find . -name "*.pyc" -exec git rm -f {} \;"
+
 title(){
 	   # echo -en "\033]0;$1\a"
 	   wmctrl -r :ACTIVE: -N $1
@@ -200,3 +210,4 @@ PRO
 # multiline history #
 shopt -s cmdhist
 set -o vi
+
