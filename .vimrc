@@ -191,13 +191,29 @@ noremap <Leader>S :set smartindent<cr>
 
 noremap <Leader>x :!ctags %<cr><cr>
 
-" noremap <Leader>m :make %
-" noremap <Leader>q :!./a.out
-
 noremap <Leader>l :ls<cr>
 noremap <Leader>ti :e ~/chideit/apps/chide/products/reviewroom/tests/__init__.py<cr>
 noremap <Leader>tc :tabc<cr>
 noremap <Leader>te :tabe<cr>
+noremap <Leader>to :tabo<cr>
+
+"map <Leader>pd :norm ,kgg/USE_DEBUG_TOOL/egcc
+map <Leader>dd ,kgg/USE_DEBUG_TOOLgcc
+
+" fugitive stuff
+nnoremap <Leader>gs :Gstatus
+nnoremap <Leader>gb :Gblame
+
+" filetypes
+nnoremap <Leader>fh :set filetype=html
+nnoremap <Leader>fj :set filetype=javascript
+nnoremap <Leader>fp :set filetype=python
+nnoremap <Leader>fx :set filetype=xml
+nnoremap <Leader>ff :set filetype=
+
+" commonly edited files
+map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
+map <Leader>j :e /home/joshb/misc/vim/macros.vim
 
 " override windows redo, back to scroll up.
 noremap <c-y> <c-y>
@@ -379,15 +395,11 @@ let g:pymode_utils_whitespaces = 0
 
 " ctrlP stuff
 let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_lazy_update = 100 "350 0
+let g:ctrlp_lazy_update = 200 "350 0
 " let g:ctrlp_user_command = "ack -f %s"
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_custom_ignore = ".*.pyc$"
 let g:ctrlp_max_files = 100000
-
-" fugitive stuff
-nnoremap <Leader>gs :Gstatus
-nnoremap <Leader>gb :Gblame
 
 set noexpandtab
 
@@ -410,8 +422,6 @@ endfun
 nnoremap <silent> <c-]> :call MatchCaseTag()<CR>
 
 
-map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
-map <Leader>j :e /home/joshb/misc/vim/macros.vim
 
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
 "                            \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
@@ -427,3 +437,5 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+let g:calendar_google_calendar = 1

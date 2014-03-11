@@ -120,20 +120,27 @@ fi
 
 # directory management #
 alias PRO="cd ~/chideit/"
+alias SCRIPTS="cd ~/chideit/reviewroom/scripts/"
+alias TRANS="cd ~/chideit/reviewroom/scripts/trans"
 alias MANAGE="cd ~/chideit/reviewroom/project"
 alias VINNYMANAGE="cd ~/chideit/reviewroom/vinny"
 alias BUNDLE="cd ~/.vim/bundle/"
 alias APID="cd ~/chideit/apps/chide/products/reviewroom/api/apiv2/"
 
 # launching django #
-alias LAUNCHRR="google-chrome http://test.myreviewroom.dev:8080/admin/dashboard/"
+alias LAUNCHRR="google-chrome http://test.myreviewroom.dev:8080/admin/dashboard/ &"
+alias LAUNCHIDT="google-chrome https://idonethis.com/cal/reviewroom-1/ &"
+alias LAUNCHRRI="google-chrome --incognito http://test.myreviewroom.dev:8080/admin/dashboard/ &"
 alias LAUNCHVIM="gvim"
 alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
 alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus"
 alias LAUNCHVINNY="gnome-terminal --window-with-profile=vinny  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
 alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x python ~/chideit/reviewroom/project/manage.py runserver 0.0.0.0:8080"
+alias LSRV="LAUNCHSERVER"
 alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
-alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608"
+alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608 &"
+alias LAUNCHGMAIL="google-chrome http://mail.chide.it &"
+alias MORNING="LAUNCHRR LAUNCHRRI LAUNCHACK LAUNCHSP LAUNCHBOTH LAUNCHCAMPFIRE LAUNCHGMAIL LAUNCHVIM "
 
 alias LAUNCHCF=LAUNCHCAMPFIRE
 alias LB=LAUNCHBOTH
@@ -171,9 +178,57 @@ alias APITEAM="~/chideit/reviewroom/project/manage.py test reviewroom.TeamResour
 alias APISUB="~/chideit/reviewroom/project/manage.py test reviewroom.SubmissionResourceTest"
 alias APIALL="~/chideit/reviewroom/project/manage.py test reviewroom"
 alias TEST="~/chideit/reviewroom/project/manage.py test reviewroom"
-function TESTF() { ~/chideit/reviewroom/project/manage.py test reviewroom."$@" ;} 
+function TESTF() { 
+	prefix='reviewroom.';
+	if [ "$1" ]
+	then
+		tests="$prefix$1";
+		shift
+	else
+		tests= '';
+	fi
+
+	#alternative 
+	# for test in "$@"
+	# do
+	# 	tests="$tests $prefix$1";
+	# done
+	until [ -z "$1" ]
+	do
+		tests="$tests $prefix$1";
+		shift
+	done
+
+	echo $tests
+	if [ "$tests" ]
+	then 
+		~/chideit/reviewroom/project/manage.py test $tests;
+	fi
+} 
 alias TESt=TEST
 alias TEst=TEST
+
+#search helpers; ag is the_silver_searcher
+alias ag="ag -i"
+function MVC() {
+	ag "mvc.view.*$1" -Gpy $2
+}
+
+function MVCN() {
+	ag "mvc.view.*name=.*$1" -Gpy $2
+}
+
+function agjs {
+	ag "$1" -Gjs $2
+}
+
+function agpy {
+	ag "$1" -Gpy $2
+}
+
+function agh {
+	ag "$1" -Ghtml $2
+}
 
 #show modified files
 alias LS="git ls-files -m"
@@ -196,7 +251,7 @@ alias sl="sl -ale"
 alias FIXRES="xrandr --output HDMI1 --mode  1920x1080 --right-of VGA1 --output VGA1 --mode 1920x1080"
 
 #remove .pycs 
-alias FIXPYCs="find . -name "*.pyc" -exec git rm -f {} \;"
+alias FIXPYCs="find . -name "*.pyc" -exec rm -f {} \;"
 
 title(){
 	   # echo -en "\033]0;$1\a"
@@ -211,3 +266,4 @@ PRO
 shopt -s cmdhist
 set -o vi
 
+# . ~/.git_completion.sh
