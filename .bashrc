@@ -133,15 +133,22 @@ alias LAUNCHIDT="google-chrome https://idonethis.com/cal/reviewroom-1/ &"
 alias LAUNCHRRI="google-chrome --incognito http://test.myreviewroom.dev:8080/admin/dashboard/ &"
 alias LAUNCHVIM="gvim"
 alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
-alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus"
+alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus --ipython"
 alias LAUNCHVINNY="gnome-terminal --window-with-profile=vinny  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
 alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x python ~/chideit/reviewroom/project/manage.py runserver 0.0.0.0:8080"
 alias LSRV="LAUNCHSERVER"
 alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
 alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608 &"
 alias LAUNCHGMAIL="google-chrome http://mail.chide.it &"
-alias MORNING="LAUNCHRR LAUNCHRRI LAUNCHACK LAUNCHSP LAUNCHBOTH LAUNCHCAMPFIRE LAUNCHGMAIL LAUNCHVIM "
+alias MORNING="LAUNCHRR LAUNCHRRI LAUNCHACK"
+alias GOOD="LAUNCHSP; LAUNCHBOTH"
+alias RIGHT="LAUNCHCAMPFIRE LAUNCHGMAIL LAUNCHVIM "
 
+HELLO() {
+	GOOD
+	MORNING
+	RIGHT
+}
 alias LAUNCHCF=LAUNCHCAMPFIRE
 alias LB=LAUNCHBOTH
 alias LSP=LAUNCHSP
@@ -159,6 +166,9 @@ alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cb
 alias RRCO="git checkout ReviewRoom-5.0"
 alias APICO="git checkout josh/apiv2"
 alias RCMPFCO="git checkout josh/rcmpf"
+alias MMCO="git checkout josh/mailmerge"
+alias DRFCO="git checkout josh/api_drf"
+
 alias GPR="git pull --rebase"
 
 # show current branch
@@ -258,6 +268,7 @@ title(){
 	   wmctrl -r :ACTIVE: -N $1
    }
 # function gvim () { (/usr/bin/gvim -f --remote-silent "$@" &) }
+function gvim () { (/usr/bin/gvim -f --remote-silent "$@" ) }
 PRO
 
 . ~/django/extras/django_bash_completion

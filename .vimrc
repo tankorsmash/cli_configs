@@ -170,12 +170,15 @@ nnoremap <c-c> <Esc>
 
 
 "change leader key
-let mapleader = ","
+let mapleader = " "
 
 "map keys for next and prev buffer
 noremap <Leader>n :bn
 noremap <Leader>p :bp
 noremap <Leader>d :e ~/chideit/reviewroom/project/debug.log
+
+noremap <Leader>dh :e ~/diet/highday.txt
+noremap <Leader>dd :e ~/diet/diet.txt
 
 " noremap <Leader>c :lcd %:p:h
 noremap <Leader>l :ls
@@ -213,6 +216,7 @@ nnoremap <Leader>ff :set filetype=
 
 " commonly edited files
 map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
+map <Leader>s :e /home/joshb/chideit/reviewroom/project/settings/__init__.py
 map <Leader>j :e /home/joshb/misc/vim/macros.vim
 
 " override windows redo, back to scroll up.
@@ -439,3 +443,12 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 cmap w!! w !sudo tee > /dev/null %
 
 let g:calendar_google_calendar = 1
+
+"open docx as zip
+au BufReadCmd *.jar,*.xpi,*.docx call zip#Browse(expand("<amatch>"))
+
+set timeoutlen=3000
+set guifont=Monospace\ 15
+
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
