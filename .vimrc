@@ -108,6 +108,7 @@ set guifont=Monospace\ 14
 " set guifont="Consolas for Powerline/CONSOLAS-Powerline":h15
 colorscheme vividchalk
 colorscheme Monokai
+colorscheme molokai
 
 
 let g:buftabs_only_basename=1
@@ -162,6 +163,10 @@ let MRU_Exclude_Files = '.*fugitiveblame.*'
 "hard mode for insert mode
 inoremap <Esc> <Nop>
 inoremap <Backspace> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
 inoremap <c-b> <Del>
 
 inoremap <c-c> <Esc>
@@ -175,7 +180,6 @@ let mapleader = " "
 "map keys for next and prev buffer
 noremap <Leader>n :bn
 noremap <Leader>p :bp
-noremap <Leader>d :e ~/chideit/reviewroom/project/debug.log
 
 noremap <Leader>dh :e ~/diet/highday.txt
 noremap <Leader>dd :e ~/diet/diet.txt
@@ -201,7 +205,8 @@ noremap <Leader>te :tabe<cr>
 noremap <Leader>to :tabo<cr>
 
 "map <Leader>pd :norm ,kgg/USE_DEBUG_TOOL/egcc
-map <Leader>dd ,kgg/USE_DEBUG_TOOLgcc
+noremap <Leader>dl :e ~/reviewroom/log/debug.log
+map <Leader>dd  :e/home/joshb/chideit/reviewroom/project/settings/local.pygg/USE_DEBUG_TOOLgcc/<Up>
 
 " fugitive stuff
 nnoremap <Leader>gs :Gstatus
@@ -216,7 +221,7 @@ nnoremap <Leader>ff :set filetype=
 
 " commonly edited files
 map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
-map <Leader>s :e /home/joshb/chideit/reviewroom/project/settings/__init__.py
+map <Leader>si :e /home/joshb/chideit/reviewroom/project/settings/__init__.py
 map <Leader>j :e /home/joshb/misc/vim/macros.vim
 
 " override windows redo, back to scroll up.
@@ -441,6 +446,7 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 let g:calendar_google_calendar = 1
 
@@ -452,3 +458,16 @@ set guifont=Monospace\ 15
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+inoremap  
+
+nnoremap K :echo "K was disabled"
+
+abbreviate getbyid objects.get(id=
+abbreviate getbyfilter objects.filter(
+
+set nostartofline
+
+nnoremap <Leader>js :call JsBeautify()
+vnoremap <Leader>js :call RangeJsBeautify()
+
+let g:multi_cursor_quit_key='<C-c>'

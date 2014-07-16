@@ -63,8 +63,6 @@ if [ "$color_prompt" = yes ]; then
 	PROMPT_ERR='$(if [[ $? = 0 ]]; then echo -ne "( ͡° ͜ʖ ͡°)"; else echo -ne "( ͡°_ʖ ͡°)"; fi;)'
 	export PS1="\n[\[\033[32m\]\w\[\033[0m\]]	$PROMPT_ERR\n\t\$(__git_ps1) \[\033[1;36m\]\u\[\033[1;33m\]-> \[\033[0m\] "
 
-
-
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -116,7 +114,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-
 
 # directory management #
 alias PRO="cd ~/chideit/"
@@ -179,7 +176,6 @@ alias CT="PRO; ctags -R; cd -"
 
 # compilemessages with highlighting on the lang key
 alias COMPILE="./compilemessages.sh &> /tmp/temp.txt;sed -s 's/^\(\/.*locale\/\)\(.*\)\(\/LC_MESSA.*\)/\1\x1b[0;34m\2\x1b[0m\3/' /tmp/temp.txt"
-
 
 # testing
 alias APITASK="~/chideit/reviewroom/project/manage.py test reviewroom.TaskResourceTest"
@@ -244,7 +240,7 @@ function agh {
 alias LS="git ls-files -m"
 alias A="ack"
 alias LESS="less -SEX"
-alias C="clear"
+# alias C="clear"
 alias CO="git checkout"
 alias G="git grep"
 alias GD="git diff"
@@ -252,6 +248,7 @@ alias GP="git push"
 
 alias QUALE="echo \"Close Enough\"; QUAKE"
 alias QUAKE="cd ~/quake3;sudo ./quake3.x86; FIXRES; cd -"
+alias QUAKE="sudo /usr/lib/ioquake3/ioquake3; FIXRES; cd -"
 alias Q="QUAKE"
 
 # dick moves
@@ -261,7 +258,7 @@ alias sl="sl -ale"
 alias FIXRES="xrandr --output HDMI1 --mode  1920x1080 --right-of VGA1 --output VGA1 --mode 1920x1080"
 
 #remove .pycs 
-alias FIXPYCs="find . -name "*.pyc" -exec rm -f {} \;"
+alias FIXPYCs="sudo find . -name "*.pyc" -exec rm -f {} \;"
 
 title(){
 	   # echo -en "\033]0;$1\a"
@@ -278,3 +275,9 @@ shopt -s cmdhist
 set -o vi
 
 # . ~/.git_completion.sh
+
+alias DJ16="source ~/virtualenv/dj16/bin/activate"
+alias DEAC="deactivate"
+
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
