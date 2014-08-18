@@ -38,6 +38,7 @@ map  :update
 "retab
 "
 set relativenumber
+set number
 
 let g:sparkupNextMapping = '<Leader><c-i>'
 
@@ -108,7 +109,7 @@ set guifont=Monospace\ 14
 " set guifont="Consolas for Powerline/CONSOLAS-Powerline":h15
 colorscheme vividchalk
 colorscheme Monokai
-colorscheme molokai
+" colorscheme molokai
 
 
 let g:buftabs_only_basename=1
