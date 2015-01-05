@@ -121,5 +121,6 @@ set -o vi
 alias DJ16="source ~/virtualenv/dj16/bin/activate"
 alias DEAC="deactivate"
 
+alias TWF="ssh tankorsmash@184.172.15.235"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

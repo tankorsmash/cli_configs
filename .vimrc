@@ -199,11 +199,19 @@ noremap <Leader>S :set smartindent<cr>
 
 noremap <Leader>x :!ctags %<cr><cr>
 
+nnoremap <Leader>v :norm mmggVG"+y<CR>`m
+
 noremap <Leader>l :ls<cr>
 noremap <Leader>ti :e ~/chideit/apps/chide/products/reviewroom/tests/__init__.py<cr>
 noremap <Leader>tc :tabc<cr>
 noremap <Leader>te :tabe<cr>
 noremap <Leader>to :tabo<cr>
+
+noremap <Leader><Leader>t :e ~/chideit/apps/chide/products/reviewroom/triggers.py<cr>
+noremap <Leader><Leader>h :e ~/chideit/apps/chide/products/reviewroom/handlers.py<cr>
+noremap <Leader><Leader>a :e ~/chideit/apps/chide/products/reviewroom/admin/manage.py<cr>
+noremap <Leader><Leader>s :e ~/chideit/apps/chide/products/reviewroom/views/submissions.py<cr>
+noremap <Leader><Leader>r :e ~/chideit/apps/chide/products/reviewroom/views/summary.py<cr>
 
 "map <Leader>pd :norm ,kgg/USE_DEBUG_TOOL/egcc
 noremap <Leader>dl :e ~/reviewroom/log/debug.log
@@ -224,6 +232,11 @@ nnoremap <Leader>ff :set filetype=
 map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
 map <Leader>si :e /home/joshb/chideit/reviewroom/project/settings/__init__.py
 map <Leader>j :e /home/joshb/misc/vim/macros.vim
+
+" add template paths for gf completing
+set path+=~/chideit/apps/chide/products/reviewroom/templates/
+set path+=~/chideit/reviewroom/templates/
+set path+=~/chideit/apps
 
 " override windows redo, back to scroll up.
 noremap <c-y> <c-y>
@@ -407,9 +420,12 @@ let g:pymode_utils_whitespaces = 0
 let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_lazy_update = 200 "350 0
 " let g:ctrlp_user_command = "ack -f %s"
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_custom_ignore = ".*.pyc$"
 let g:ctrlp_max_files = 100000
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 set noexpandtab
 
@@ -452,7 +468,7 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 let g:calendar_google_calendar = 1
 
 "open docx as zip
-au BufReadCmd *.jar,*.xpi,*.docx call zip#Browse(expand("<amatch>"))
+au BufReadCmd *.jar,*.xpi,*.docx,*.doc call zip#Browse(expand("<amatch>"))
 
 set timeoutlen=3000
 set guifont=Monospace\ 15
@@ -471,4 +487,9 @@ set nostartofline
 nnoremap <Leader>js :call JsBeautify()
 vnoremap <Leader>js :call RangeJsBeautify()
 
+nnoremap <Leader>gt :GundoToggle
+
 let g:multi_cursor_quit_key='<C-c>'
+
+nnoremap <Leader>qo :copen<cr>
+nnoremap <Leader>qc :cclose<cr>
