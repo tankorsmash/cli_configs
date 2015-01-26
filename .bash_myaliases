@@ -1,0 +1,171 @@
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias STAT='git status -sb'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# directory management #
+alias PRO="cd ~/chideit/"
+alias SCRIPTS="cd ~/chideit/reviewroom/scripts/"
+alias TRANS="cd ~/chideit/reviewroom/scripts/trans"
+alias MANAGE="cd ~/chideit/reviewroom/project"
+alias VINNYMANAGE="cd ~/chideit/reviewroom/vinny"
+alias BUNDLE="cd ~/.vim/bundle/"
+alias APID="cd ~/chideit/apps/chide/products/reviewroom/api/apiv2/"
+
+# launching django #
+alias LAUNCHRR="google-chrome http://test.myreviewroom.dev:8080/admin/dashboard/ &"
+alias LAUNCHIDT="google-chrome https://idonethis.com/cal/reviewroom-1/ &"
+alias LAUNCHRRI="google-chrome --incognito http://test.myreviewroom.dev:8080/admin/dashboard/ &"
+alias LAUNCHVIM="gvim"
+alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
+alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus --ipython"
+
+# cachepublisher #
+alias LAUNCHCACHEPUBLISHER="gnome-terminal --title=\"CACHEPUB\" -x python ~/chideit/reviewroom/project/manage.py cachepublisher"
+alias LAUNCHCP="LAUNCHCACHEPUBLISHER"
+alias LCP="LAUNCHCP"
+
+# vinny and server #
+alias LAUNCHVINNY="gnome-terminal --window-with-profile=vinny  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
+alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x python ~/chideit/reviewroom/project/manage.py runserver 0.0.0.0:8080"
+alias LSRV="LAUNCHSERVER"
+alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
+
+alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608 &"
+
+alias LAUNCHGMAIL="google-chrome http://mail.chide.it &"
+
+alias MORNING="LAUNCHRR LAUNCHRRI LAUNCHACK"
+alias GOOD="LAUNCHSP; LAUNCHBOTH"
+alias RIGHT="LAUNCHCAMPFIRE LAUNCHGMAIL LAUNCHVIM "
+
+HELLO() {
+	GOOD
+	MORNING
+	RIGHT
+}
+alias LAUNCHCF=LAUNCHCAMPFIRE
+alias LB=LAUNCHBOTH
+alias LSP=LAUNCHSP
+alias LSER=LAUNCHSERVER
+# alias HELLO="LAUNCHVIM; LAUNCHACK; LSP; LAUNCHB;"
+
+alias API2="python ~/chideit/apps/chide/products/reviewroom/api/apiv2/apiv2_fooling.py"
+alias API1="python ~/chideit/apps/chide/products/reviewroom/api/api_fooling.py"
+
+# git logging #
+alias LOGV="git log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate"
+alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cblue [%cn]' --decorate --date=relative"
+alias LOGDJ="LOGD --author=josh"
+
+# git checkout branches #
+alias RRCO="git checkout ReviewRoom-5.0"
+alias APICO="git checkout josh/apiv2"
+alias RCMPFCO="git checkout josh/rcmpf"
+alias MMCO="git checkout josh/mailmerge"
+alias DRFCO="git checkout josh/api_drf"
+
+alias GPR="git pull --rebase"
+alias YOUMAGNIFICENTFUCK="git pull --rebase; git push"
+
+# show current branch
+alias B="git rev-parse --abbrev-ref HEAD"
+
+# ctags
+alias CT="PRO; ctags -R; cd -"
+
+# compilemessages with highlighting on the lang key
+alias COMPILE="./compilemessages.sh &> /tmp/temp.txt;sed -s 's/^\(\/.*locale\/\)\(.*\)\(\/LC_MESSA.*\)/\1\x1b[0;34m\2\x1b[0m\3/' /tmp/temp.txt"
+
+# testing
+alias APITASK="~/chideit/reviewroom/project/manage.py test reviewroom.TaskResourceTest"
+alias APIUSER="~/chideit/reviewroom/project/manage.py test reviewroom.UserResourceTest"
+alias APITEAM="~/chideit/reviewroom/project/manage.py test reviewroom.TeamResourceTest"
+alias APISUB="~/chideit/reviewroom/project/manage.py test reviewroom.SubmissionResourceTest"
+alias APIALL="~/chideit/reviewroom/project/manage.py test reviewroom"
+alias TEST="~/chideit/reviewroom/project/manage.py test reviewroom"
+function TESTF() { 
+	prefix='reviewroom.';
+	if [ "$1" ]
+	then
+		tests="$prefix$1";
+		shift
+	else
+		tests= '';
+	fi
+
+	#alternative 
+	# for test in "$@"
+	# do
+	# 	tests="$tests $prefix$1";
+	# done
+	until [ -z "$1" ]
+	do
+		tests="$tests $prefix$1";
+		shift
+	done
+
+	echo $tests
+	if [ "$tests" ]
+	then 
+		~/chideit/reviewroom/project/manage.py test $tests;
+	fi
+} 
+alias TESt=TEST
+alias TEst=TEST
+
+#search helpers; ag is the_silver_searcher
+alias ag="ag -i"
+function MVC() {
+	ag "mvc.view.*$1" -Gpy $2
+}
+
+function MVCN() {
+	ag "mvc.view.*name=.*$1" -Gpy $2
+}
+
+function agjs {
+	ag "$1" -Gjs $2
+}
+
+function agpy {
+	ag "$1" -Gpy $2
+}
+
+function agh {
+	ag "$1" -Ghtml $2
+}
+
+#show modified files
+alias LS="git ls-files -m"
+alias A="ack"
+alias LESS="less -SEX"
+# alias C="clear"
+alias CO="git checkout"
+alias G="git grep"
+alias GD="git diff"
+alias GP="git push"
+
+alias QUALE="echo \"Close Enough\"; QUAKE"
+alias QUAKE="cd ~/quake3;sudo ./quake3.x86; FIXRES; cd -"
+alias QUAKE="sudo /usr/lib/ioquake3/ioquake3; FIXRES; cd -"
+alias Q="QUAKE"
+
+# dick moves
+alias sl="sl -ale"
+
+# fix resolution
+alias FIXRES="xrandr --output HDMI1 --mode  1920x1080 --right-of VGA1 --output VGA1 --mode 1920x1080"
+
+
+title(){
+	   # echo -en "\033]0;$1\a"
+	   wmctrl -r :ACTIVE: -N $1
+   }
+# function gvim () { (/usr/bin/gvim -f --remote-silent "$@" &) }
+function gvim () { (/usr/bin/gvim -f --remote-silent "$@" ) }
