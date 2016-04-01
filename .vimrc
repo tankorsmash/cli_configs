@@ -1,3 +1,4 @@
+
 filetype off
 
 "
@@ -25,7 +26,7 @@ let g:pymode_lint_write = 0
 set incsearch
 
 
-map  :update
+map  :update<cr>
 
 
 
@@ -179,25 +180,24 @@ nnoremap <c-c> <Esc>
 let mapleader = " "
 
 "map keys for next and prev buffer
-noremap <Leader>n :bn
-noremap <Leader>p :bp
+noremap <Leader>n :bn<cr>
+noremap <Leader>p :bp<cr>
 
-noremap <Leader>dh :e ~/diet/highday.txt
-noremap <Leader>dd :e ~/diet/diet.txt
+noremap <Leader>dh :e ~/diet/highday.txt<cr>
+noremap <Leader>dd :e ~/diet/diet.txt<cr>
 
 " noremap <Leader>c :lcd %:p:h
-noremap <Leader>l :ls
+noremap <Leader>l :ls<cr>
 
 "map keys for running current file in Python
-noremap <Leader>z :!python %
-noremap <Leader>c :e $MYVIMRC
-noremap <Leader>a :MRU
+noremap <Leader>z :!python %<cr>
+noremap <Leader>x :!python3.4 %<cr>
+noremap <Leader>c :e $MYVIMRC<cr>
+noremap <Leader>a :MRU<cr>
 
 "make it so ,s and ,S enable or disable smart indent
-noremap <Leader>s :set nosmartindent<cr>
-noremap <Leader>S :set smartindent<cr>
-
-noremap <Leader>x :!ctags %<cr><cr>
+" noremap <Leader>s :set nosmartindent<cr>
+" noremap <Leader>S :set smartindent<cr>
 
 nnoremap <Leader>v :norm mmggVG"+y<CR>`m
 
@@ -207,31 +207,31 @@ noremap <Leader>tc :tabc<cr>
 noremap <Leader>te :tabe<cr>
 noremap <Leader>to :tabo<cr>
 
-noremap <Leader><Leader>t :e ~/chideit/apps/chide/products/reviewroom/triggers.py<cr>
-noremap <Leader><Leader>h :e ~/chideit/apps/chide/products/reviewroom/handlers.py<cr>
-noremap <Leader><Leader>a :e ~/chideit/apps/chide/products/reviewroom/admin/manage.py<cr>
-noremap <Leader><Leader>s :e ~/chideit/apps/chide/products/reviewroom/views/submissions.py<cr>
-noremap <Leader><Leader>r :e ~/chideit/apps/chide/products/reviewroom/views/summary.py<cr>
+noremap <Leader>ft :e ~/chideit/apps/chide/products/reviewroom/triggers.py<cr>
+noremap <Leader>fh :e ~/chideit/apps/chide/products/reviewroom/handlers.py<cr>
+noremap <Leader>fa :e ~/chideit/apps/chide/products/reviewroom/admin/manage.py<cr>
+noremap <Leader>fs :e ~/chideit/apps/chide/products/reviewroom/views/submissions.py<cr>
+noremap <Leader>fr :e ~/chideit/apps/chide/products/reviewroom/views/summary.py<cr>
 
-"map <Leader>pd :norm ,kgg/USE_DEBUG_TOOL/egcc
-noremap <Leader>dl :e ~/reviewroom/log/debug.log
-map <Leader>dd  :e/home/joshb/chideit/reviewroom/project/settings/local.pygg/USE_DEBUG_TOOLgcc/<Up>
+"map <Leader>pd :norm ,kgg/USE_DEBUG_TOOL/e<cr>gcc
+noremap <Leader>dl :e ~/reviewroom/log/debug.log<cr>
+map <Leader>dd  :e/home/joshb/chideit/reviewroom/project/settings/local.py<cr>gg/USE_DEBUG_TOOL<cr>gcc/<Up><cr>
 
 " fugitive stuff
-nnoremap <Leader>gs :Gstatus
-nnoremap <Leader>gb :Gblame
+nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <Leader>gb :Gblame<cr>
 
 " filetypes
-nnoremap <Leader>fh :set filetype=html
-nnoremap <Leader>fj :set filetype=javascript
-nnoremap <Leader>fp :set filetype=python
-nnoremap <Leader>fx :set filetype=xml
-nnoremap <Leader>ff :set filetype=
+nnoremap <Leader>ffh :set filetype=html<cr>
+nnoremap <Leader>ffj :set filetype=javascript<cr>
+nnoremap <Leader>ffp :set filetype=python<cr>
+nnoremap <Leader>ffx :set filetype=xml<cr>
+nnoremap <Leader>fff :set filetype=<cr>
 
 " commonly edited files
-map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py
-map <Leader>si :e /home/joshb/chideit/reviewroom/project/settings/__init__.py
-map <Leader>j :e /home/joshb/misc/vim/macros.vim
+map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py<cr>
+map <Leader>si :e /home/joshb/chideit/reviewroom/project/settings/__init__.py<cr>
+map <Leader>j :e /home/joshb/misc/vim/macros.vim<cr>
 
 " add template paths for gf completing
 set path+=~/chideit/apps/chide/products/reviewroom/templates/
@@ -406,22 +406,11 @@ endfunction
 vnoremap ~ ygv"=TwiddleCase(@")<CR>Pgv
 
 
-
-" go fullscreen
-"simalt ~x<cr>
-"au GUIEnter * simalt ~x
-
-" python-mode stuff
-let g:pymode_doc_key = '<Leader><Leader>a'
-let g:pymode_folding = 0
-let g:pymode_utils_whitespaces = 0
-
 " ctrlP stuff
 let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_lazy_update = 200 "350 0
+let g:ctrlp_lazy_update = 0 "200 350 0
 " let g:ctrlp_user_command = "ack -f %s"
-let g:ctrlp_custom_ignore = ".*.pyc$"
-let g:ctrlp_max_files = 100000
+let g:ctrlp_max_files = 1000000
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -457,13 +446,13 @@ set showcmd
 
 " set foldlevel=20
 
-let g:ctrlp_custom_ignore = ".*\/c\/.*"
+let g:ctrlp_custom_ignore = ".*\/c\/.*\|.*.pyc$\|.*boost.*\|.*fsmobile.*$"
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+cmap w!! w !sudo tee > /dev/null %<cr>
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!<cr>
 
 let g:calendar_google_calendar = 1
 
@@ -477,19 +466,74 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 inoremap  
 
-nnoremap K :echo "K was disabled"
+nnoremap K :echo "K was disabled"<cr>
 
 abbreviate getbyid objects.get(id=
 abbreviate getbyfilter objects.filter(
 
 set nostartofline
 
-nnoremap <Leader>js :call JsBeautify()
-vnoremap <Leader>js :call RangeJsBeautify()
+nnoremap <Leader>js :call JsBeautify()<cr>
+vnoremap <Leader>js :call RangeJsBeautify()<cr>
 
-nnoremap <Leader>gt :GundoToggle
+nnoremap <Leader>gt :GundoToggle<cr>
 
 let g:multi_cursor_quit_key='<C-c>'
 
 nnoremap <Leader>qo :copen<cr>
 nnoremap <Leader>qc :cclose<cr>
+
+syntax on
+
+set mouse=
+
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+
+if $COLORTERM == 'gnome-terminal'
+	set t_Co=256
+endif
+
+nnoremap  1
+
+let g:ftplugin_sql_omni_key = '<C-\>'
+
+" 
+" "
+" " Insert into your .vimrc after quick-scope is loaded.
+" " Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
+" 
+" function! Quick_scope_selective(movement)
+"     let needs_disabling = 0
+"     if !g:qs_enable
+"         QuickScopeToggle
+"         redraw
+"         let needs_disabling = 1
+"     endif
+" 
+"     let letter = nr2char(getchar())
+" 
+"     if needs_disabling
+"         QuickScopeToggle
+"     endif
+" 
+"     return a:movement . letter
+" endfunction
+" 
+" let g:qs_enable = 0
+" 
+" nnoremap <expr> <silent> f Quick_scope_selective('f')
+" nnoremap <expr> <silent> F Quick_scope_selective('F')
+" nnoremap <expr> <silent> t Quick_scope_selective('t')
+" nnoremap <expr> <silent> T Quick_scope_selective('T')
+" vnoremap <expr> <silent> f Quick_scope_selective('f')
+" vnoremap <expr> <silent> F Quick_scope_selective('F')
+" vnoremap <expr> <silent> t Quick_scope_selective('t')
+" vnoremap <expr> <silent> T Quick_scope_selective('T')
+
+nnoremap <Leader>e :e ~/chideit/<C-R>+<CR>
+nnoremap <Leader><Leader>h :e ~/chideit/apps/chide/products/reviewroom/handlers.py<cr>
+nnoremap <Leader><Leader>t :e ~/chideit/apps/chide/products/reviewroom/triggers.py<cr>
+nnoremap <Leader><Leader>s :e ~/chideit/apps/chide/products/reviewroom/submissions.py<cr>
+
+" search current word with :Ag!
+nnoremap <Leader><Leader>a :Ag! <c-r><c-w><CR>
