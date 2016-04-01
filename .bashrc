@@ -107,7 +107,7 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-. ~/.bash_myaliases
+. ~/.bash_myaliases.sh
 PRO
 
 . ~/django/extras/django_bash_completion
@@ -124,3 +124,38 @@ alias DEAC="deactivate"
 alias TWF="ssh tankorsmash@184.172.15.235"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+alias OPEN="xdg-open"
+alias O="OPEN"
+
+josh__expressions=(
+	"Josh the the bomb"
+	"Go fuck yourself"
+	"Have a nice day"
+	"Play BiochRL"
+	"Beat up the face"
+	"This is how we do it"
+	"Poop chute"
+	"Skrobbie's awesome"
+	"J2FL"
+	"Jimeny Crickets"
+	"How you doin?"
+	"Josh's Laptop"
+	"Play Beat up the face"
+	"Working on Build up the base"
+	"I'm scared"
+	"Carrots are scary"
+)
+josh__selected_expression=${josh__expressions[$RANDOM % ${#josh__expressions[@]} ]}
+echo $josh__selected_expression
+
+
+
+#dont set to 0 though
+set_brightness() { case $1 in [0]) echo "dont be stupid"; return $1;; esac; sudo echo "$1" > ~/change_brightness;};
+
+export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
