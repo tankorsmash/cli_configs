@@ -10,9 +10,11 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # directory management #
 alias PRO="cd ~/chideit/"
+alias FRT="cd ~/fr-testing/"
 alias SCRIPTS="cd ~/chideit/reviewroom/scripts/"
 alias TRANS="cd ~/chideit/reviewroom/scripts/trans"
 alias MANAGE="cd ~/chideit/reviewroom/project"
+alias MAN="MANAGE"
 alias VINNYMANAGE="cd ~/chideit/reviewroom/vinny"
 alias BUNDLE="cd ~/.vim/bundle/"
 alias APID="cd ~/chideit/apps/chide/products/reviewroom/api/apiv2/"
@@ -25,15 +27,22 @@ alias LAUNCHVIM="gvim"
 alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
 alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python ~/chideit/reviewroom/project/manage.py shell_plus --ipython"
 
-# cachepublisher #
+# cachepublisher DEPRECATED #
 alias LAUNCHCACHEPUBLISHER="gnome-terminal --title=\"CACHEPUB\" -x python ~/chideit/reviewroom/project/manage.py cachepublisher"
 alias LAUNCHCP="LAUNCHCACHEPUBLISHER"
 alias LCP="LAUNCHCP"
 
+# cachepublisher #
+alias LAUNCHJOBQUEUE="gnome-terminal --title=\"JOBQUEUE\" -x python ~/chideit/reviewroom/project/manage.py jobqueue"
+alias LAUNCHJQ="LAUNCHJOBQUEUE"
+alias LJQ="LAUNCHJQ"
+
 # vinny and server #
 alias LAUNCHVINNY="gnome-terminal --window-with-profile=vinny  --title=\"VINNY\" -x python ~/chideit/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
 alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x python ~/chideit/reviewroom/project/manage.py runserver 0.0.0.0:8080"
+alias LAUNCHSERVERPLUS="gnome-terminal --window-with-profile=serverplus --title=\"SERVERPLUS\" -x python ~/chideit/reviewroom/project/manage.py runserver_plus 0.0.0.0:8080"
 alias LSRV="LAUNCHSERVER"
+alias LSRVP="LAUNCHSERVERPLUS"
 alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
 
 alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608 &"
@@ -53,6 +62,7 @@ alias LAUNCHCF=LAUNCHCAMPFIRE
 alias LB=LAUNCHBOTH
 alias LSP=LAUNCHSP
 alias LSER=LAUNCHSERVER
+alias LSERP=LAUNCHSERVERP
 # alias HELLO="LAUNCHVIM; LAUNCHACK; LSP; LAUNCHB;"
 
 alias API2="python ~/chideit/apps/chide/products/reviewroom/api/apiv2/apiv2_fooling.py"
@@ -62,16 +72,19 @@ alias API1="python ~/chideit/apps/chide/products/reviewroom/api/api_fooling.py"
 alias LOGV="git log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate"
 alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cblue [%cn]' --decorate --date=relative"
 alias LOGDJ="LOGD --author=josh"
+alias LOGDJJ="LOGD --author=josh -n5"
 
 # git checkout branches #
-alias RRCO="git checkout ReviewRoom-5.0"
-alias APICO="git checkout josh/apiv2"
+alias RRCO="git checkout josh/master"
+alias MASTER="git checkout master"
+# alias APICO="git checkout josh/apiv2"
+# alias DRFCO="git checkout josh/api_drf"
+alias APIDRF="git checkout josh/api_drf_51"
 alias RCMPFCO="git checkout josh/rcmpf"
 alias MMCO="git checkout josh/mailmerge"
-alias DRFCO="git checkout josh/api_drf"
+alias M51="git merge ReviewRoom-5.1-dev"
 
 alias GPR="git pull --rebase"
-alias YOUMAGNIFICENTFUCK="git pull --rebase; git push"
 
 # show current branch
 alias B="git rev-parse --abbrev-ref HEAD"
@@ -88,9 +101,9 @@ alias APIUSER="~/chideit/reviewroom/project/manage.py test reviewroom.UserResour
 alias APITEAM="~/chideit/reviewroom/project/manage.py test reviewroom.TeamResourceTest"
 alias APISUB="~/chideit/reviewroom/project/manage.py test reviewroom.SubmissionResourceTest"
 alias APIALL="~/chideit/reviewroom/project/manage.py test reviewroom"
-alias TEST="~/chideit/reviewroom/project/manage.py test reviewroom"
+alias TEST="~/chideit/reviewroom/project/manage.py test chide.products.reviewroom"
 function TESTF() { 
-	prefix='reviewroom.';
+	prefix='chide.products.reviewroom.tests.';
 	if [ "$1" ]
 	then
 		tests="$prefix$1";
@@ -120,7 +133,8 @@ alias TESt=TEST
 alias TEst=TEST
 
 #search helpers; ag is the_silver_searcher
-alias ag="ag -i"
+alias ag="ag -S"
+
 function MVC() {
 	ag "mvc.view.*$1" -Gpy $2
 }
@@ -129,11 +143,11 @@ function MVCN() {
 	ag "mvc.view.*name=.*$1" -Gpy $2
 }
 
-function agjs {
+function agj {
 	ag "$1" -Gjs $2
 }
 
-function agpy {
+function agp {
 	ag "$1" -Gpy $2
 }
 
@@ -169,3 +183,24 @@ title(){
    }
 # function gvim () { (/usr/bin/gvim -f --remote-silent "$@" &) }
 function gvim () { (/usr/bin/gvim -f --remote-silent "$@" ) }
+
+alias PIP="sudo -H pip install"
+alias APT="sudo apt-get install"
+
+alias SSH="ssh  joshb@192.168.176.121"
+
+alias STREAK="python ~/games/github.py streak"
+alias CONTRIB="python ~/games/github.py contribs"
+
+function PO() { 
+	ag "$1" -G"$2".*po $3;
+} 
+
+alias ag="ag --ignore django.po"
+
+alias TEDIUM="MASTER;git pull;RRCO"
+alias TED="TEDIUM"
+
+alias DOWN="cd ~/Downloads"
+
+alias DBSHELL="MANAGE;./manage.py dbshell"
