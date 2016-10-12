@@ -1,3 +1,4 @@
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -70,13 +71,17 @@ alias API1="python ~/chideit/apps/chide/products/reviewroom/api/api_fooling.py"
 
 # git logging #
 alias LOGV="git log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate"
-alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cblue [%cn]' --decorate --date=relative"
+alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cblue [%cn]' --decorate --date=relative -n 20"
 alias LOGDJ="LOGD --author=josh"
 alias LOGDJJ="LOGD --author=josh -n5"
+alias SHOW="git show --name-only --pretty="""
 
 # git checkout branches #
 alias RRCO="git checkout josh/master"
 alias MASTER="git checkout master"
+alias STABLE="git checkout stable"
+alias SMAPPLY="git checkout josh/smapply"
+alias ERN="git checkout ernesto/smapply"
 # alias APICO="git checkout josh/apiv2"
 # alias DRFCO="git checkout josh/api_drf"
 alias APIDRF="git checkout josh/api_drf_51"
@@ -101,9 +106,9 @@ alias APIUSER="~/chideit/reviewroom/project/manage.py test reviewroom.UserResour
 alias APITEAM="~/chideit/reviewroom/project/manage.py test reviewroom.TeamResourceTest"
 alias APISUB="~/chideit/reviewroom/project/manage.py test reviewroom.SubmissionResourceTest"
 alias APIALL="~/chideit/reviewroom/project/manage.py test reviewroom"
-alias TEST="~/chideit/reviewroom/project/manage.py test chide.products.reviewroom"
+alias TEST="~/chideit/reviewroom/project/manage.py test chide.reviewroom"
 function TESTF() { 
-	prefix='chide.products.reviewroom.tests.';
+	prefix='chide.reviewroom.tests.';
 	if [ "$1" ]
 	then
 		tests="$prefix$1";
@@ -185,9 +190,9 @@ title(){
 function gvim () { (/usr/bin/gvim -f --remote-silent "$@" ) }
 
 alias PIP="sudo -H pip install"
-alias APT="sudo apt-get install"
+alias APT="sudo aptitude install"
 
-alias SSH="ssh  joshb@192.168.176.121"
+alias SSH="ssh joshb@192.168.176.121"
 
 alias STREAK="python ~/games/github.py streak"
 alias CONTRIB="python ~/games/github.py contribs"
@@ -204,3 +209,4 @@ alias TED="TEDIUM"
 alias DOWN="cd ~/Downloads"
 
 alias DBSHELL="MANAGE;./manage.py dbshell"
+alias PACK="gnome-terminal  -x 'bash' -c 'cd ~/chideit/reviewroom; webpack -w'"
