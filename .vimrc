@@ -13,8 +13,10 @@ Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
 Plug 'https://github.com/takac/vim-hardtime.git'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/nixprime/cpsm.git'
+Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
 Plug 'https://github.com/tmhedberg/matchit.git'
-Plug 'https://github.com/junegunn/fzf.vim.git'
+" Plug 'https://github.com/junegunn/fzf.vim.git'
+Plug 'https://github.com/rking/ag.vim.git'
 Plug 'https://github.com/mileszs/ack.vim.git'
 Plug 'https://github.com/scrooloose/nerdtree.git'
 Plug 'https://github.com/wellle/targets.vim'
@@ -23,6 +25,7 @@ Plug 'https://github.com/tomtom/tcomment_vim.git'
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/shumphrey/fugitive-gitlab.vim.git'
 Plug 'https://github.com/vim-scripts/mru.vim.git'
 Plug 'https://github.com/flazz/vim-colorschemes.git'
 Plug 'https://github.com/powerline/fonts.git'
@@ -32,16 +35,29 @@ Plug 'https://github.com/AndrewRadev/switch.vim.git'
 Plug 'https://github.com/statox/vim-compare-lines'
 Plug 'https://github.com/ntpeters/vim-better-whitespace'
 
-Plug 'https://github.com/vim-airline/vim-airline.git' "performance hit for using this
-Plug 'https://github.com/vim-airline/vim-airline-themes'
+Plug 'https://github.com/SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Plug 'https://github.com/vim-scripts/DfrankUtil'
+" Plug 'https://github.com/vim-scripts/vimprj'
+" Plug 'https://github.com/vim-scripts/indexer.tar.gz'
+
+" Plug 'https://github.com/vim-airline/vim-airline.git' "performance hit for using this
+" Plug 'https://github.com/vim-airline/vim-airline-themes'
+
+Plug 'https://github.com/itchyny/lightline.vim'
 
 "syntax plugins
 Plug 'https://github.com/pangloss/vim-javascript.git'
 Plug 'git://github.com/mustache/vim-mustache-handlebars.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git'
 Plug 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
+Plug 'https://github.com/mxw/vim-jsx'
 
 Plug 'https://github.com/Konfekt/FastFold.git' "supposed to optimize non-manual folding on insert mode entry
+
+Plug 'https://github.com/w0rp/ale.git'
+
 
 " Plug 'mattn/emmet-vim' "doesnt work with mustache well
 " Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git' "eff this
@@ -61,6 +77,8 @@ noremap Y y$
 
 set incsearch
 
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
 
 nnoremap <c-s> :w<cr>
 
@@ -72,9 +90,8 @@ let g:sparkupNextMapping = '<Leader><c-i>'
 set tags=./tags;/
 
 set autoread
-set ignorecase
+set ignorecase "noignore so * and # dont ignore case, but smartcase doesn't work
 set smartcase
-set infercase
 set gdefault
 " set nohlsearch
 set hlsearch
@@ -113,7 +130,7 @@ set undofile
 
 "history edits
 set history=10000
-set undolevels=10000
+set undolevels=100000
 
 "ignores certain files for tab completion
 set wildignore=*.swp,*.png,*.cd,*.ico,*.jpg,*.ico,*.cs~,*.txt~,*.py~
@@ -124,14 +141,8 @@ set hidden
 " allows for crazy tab menu
 set wildmenu
 
-" font size
-set guifont=Monospace\ 14
 
-if has("gui_running")
-	colorscheme Monokai
-else
-	colorscheme molokai
-endif
+colorscheme Monokai
 
 
 let g:buftabs_only_basename=1
@@ -197,7 +208,7 @@ let mapleader = " "
 noremap <Leader>n :bn<cr>
 noremap <Leader>p :bp<cr>
 
-" noremap <Leader>c :lcd %:p:h
+noremap <Leader><Leader>c :lcd %:p:h
 noremap <Leader>l :ls<cr>
 
 "map keys for running current file in Python
@@ -228,6 +239,7 @@ map <Leader>dd  :e/home/joshb/chideit/reviewroom/project/settings/local.py<cr>gg
 " fugitive stuff
 nnoremap <Leader>gs :Gstatus<cr>
 nnoremap <Leader>gb :Gblame<cr>
+let g:fugitive_gitlab_domains = ['http://git.fluidware.com']
 
 " filetypes
 nnoremap <Leader>ffh :set filetype=html<cr>
@@ -239,9 +251,12 @@ nnoremap <Leader>fff :set filetype=<cr>
 " commonly edited files
 map <Leader>k :e /home/joshb/chideit/reviewroom/project/settings/local.py<cr>
 map <Leader>si :e /home/joshb/chideit/reviewroom/project/settings/__init__.py<cr>
-map <Leader>j :e /home/joshb/misc/vim/macros.vim<cr>
+" map <Leader>j :e /home/joshb/misc/vim/macros.vim<cr>
 
-nnoremap <Leader>x :% !xmllint.exe "%" --format
+" lint xml
+nnoremap <Leader>x :% !xmllint.exe "%" --format<cr>
+
+nnoremap <Leader>dd :bufdo bd<cr>
 
 " add template paths for gf completing
 set path+=~/chideit/apps/chide/products/smapply/templates/
@@ -270,8 +285,9 @@ set scrolloff=3
 
 " sets spell on if it's a .txt file
 " au BufNewFile,BufRead *.txt set spell  
+
 " sets the cwd to current directory
-autocmd BufEnter * silent! lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 
 "end custom
 
@@ -341,20 +357,19 @@ nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 " Create a mapping (e.g. in your .vimrc) like this:
 nmap <f2> <Plug>Kwbd
 
-
-if has("gui_running")
-	" GUI is running or is about to start.
-	" Maximize gvim window.
-	set lines=60 columns=165
-else
-	" This is console Vim.
-	if exists("+lines")
-		set lines=50
-	endif
-	if exists("+columns")
-		set columns=100
-	endif
-endif
+" if has("gui_running")
+" 	" GUI is running or is about to start.
+" 	" Maximize gvim window.
+" 	set lines=60 columns=165
+" else
+" 	" This is console Vim.
+" 	if exists("+lines")
+" 		set lines=50
+" 	endif
+" 	if exists("+columns")
+" 		set columns=100
+" 	endif
+" endif
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
 
@@ -401,15 +416,18 @@ vnoremap ~ ygv"=TwiddleCase(@")<CR>Pgv
 
 " ctrlP stuff
 let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_lazy_update = 0 "200 350 0
+let g:ctrlp_lazy_update = 100 "0 200 350 0
 " let g:ctrlp_user_command = "ack -f %s"
-let g:ctrlp_max_files = 1000000
+let g:ctrlp_max_files = 1000000000
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 nnoremap <C-\> :CtrlPBuffer<CR>
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " this doesnt work on  new install for some reason, returns 0
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_match_func = {'match': 'matcher#cmatch'} " this doesnt work on  new install for some reason, returns 0
+let g:ctrlp_match_current_file = 1 " lets you match the open file anyway (not enabled when match_func is though)
+let g:ctrlp_switch_buffer = 't' " dont open a new buffer its in the same tab set
 
 
 set noexpandtab
@@ -449,7 +467,13 @@ cmap w!! w !sudo tee > /dev/null %<cr>
 au BufReadCmd *.jar,*.xpi,*.docx,*.doc call zip#Browse(expand("<amatch>"))
 
 set timeoutlen=3000
-set guifont=Inconsolata\ for\ Powerline\ 18
+
+" font size
+set guifont=Monospace\ 14
+" set guifont=monofur\ for\ Powerline\ 16
+" set guifont=Inconsolata\ for\ Powerline\ Medium\ 17
+" set guifont=Inconsolata\ for\ Powerline\ 18
+set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 15
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
@@ -472,9 +496,11 @@ nnoremap <Leader>qc :cclose<cr>
 
 set mouse=
 
-if $COLORTERM == 'gnome-terminal'
-	set t_Co=256
-endif
+set formatoptions-=o
+
+" if $COLORTERM == 'gnome-terminal'
+" 	set t_Co=256
+" endif
 
 let g:ftplugin_sql_omni_key = '<C-\>'
 
@@ -500,24 +526,24 @@ autocmd FileType Help :HardTimeOff
 
 
 " fzf
-set rtp+=~/.fzf
+" set rtp+=~/.fzf
 
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+" nmap <leader><tab> <plug>(fzf-maps-n)
+" xmap <leader><tab> <plug>(fzf-maps-x)
+" omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+" imap <c-x><c-k> <plug>(fzf-complete-word)
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+" inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " sweet django debugging prints
-" import time; from inspect import currentframe, getframeinfo; from django.db import connection; _START_TIME = time.time();_TOTAL_TIME = 0; _TOTAL_QUERIES = len(connection.queries); _LAST_TIME = [time.time()]; _LAST_QUERIES = [0]
+" import time; from inspect import currentframe, getframeinfo; from django.db import connection; _START_TIME = time.time();_TOTAL_TIME = 0; _TOTAL_QUERIES = len(connection.queries); _LAST_TIME = [time.time()]; _LAST_QUERIES = [0] #DEBUGDEBUG
 " def DEBUGDEBUG(msg=None): frameinfo = getframeinfo(currentframe(1)); _now = time.time(); delta_time = _now - _LAST_TIME[0]; _TOTAL_TIME = _now - _START_TIME; _LAST_TIME[0] = _now; delta_queries = len(connection.queries) - _LAST_QUERIES[0]; _LAST_QUERIES[0] = len(connection.queries); print "LINE:", frameinfo.lineno, "QUERIES: %04d" % len(connection.queries), "DELTA QUERIES %04d" % delta_queries, "DELTA TIME:", "%03f" %delta_time, "TOTAL TIME: %03f" % _TOTAL_TIME, "## %s" % msg if msg else ""
 " DEBUGDEBUG("start")
 
@@ -527,3 +553,70 @@ let g:rainbow_active = 1
 " SexyScroller
 let g:SexyScroller_ScrollTime = 1
 let g:SexyScroller_MaxTime = 50
+
+" captures output of cmd, ie ":TabMessage set ft" outputs "vim"
+function! TabMessage(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "no output"
+  else
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    tabnew
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+
+" lazy method of appending this onto your .vimrc ":w! >> ~/.vimrc"
+" ------------------------------------------------------------------
+" this block of commands has been autogenerated by solarized.vim and
+" includes the current, non-default Solarized option values.
+" To use, place these commands in your .vimrc file (replacing any
+" existing colorscheme commands). See also ":help solarized"
+
+" ------------------------------------------------------------------
+" Solarized Colorscheme Config
+" ------------------------------------------------------------------
+" let g:solarized_contrast="high"    "default value is normal
+" syntax enable
+" set background=dark
+" colorscheme solarized
+" ------------------------------------------------------------------
+
+" The following items are available options, but do not need to be
+" included in your .vimrc as they are currently set to their defaults.
+
+" let g:solarized_termtrans=0
+" let g:solarized_degrade=0
+" let g:solarized_bold=1
+" let g:solarized_underline=1
+" let g:solarized_italic=1
+" let g:solarized_termcolors=16
+" let g:solarized_visibility="normal"
+" let g:solarized_diffmode="normal"
+" let g:solarized_hitrail=0
+" let g:solarized_menu=1
+
+let g:indexer_disableCtagsWarning=1
+
+let g:lightline = {
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'absolutepath', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ }
