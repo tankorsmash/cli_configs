@@ -8,148 +8,21 @@ alias STAT='git status -sb'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# directory management #
-export FR_ROOT=~/chideit
-alias PRO="cd $FR_ROOT"
-alias FRT="cd ~/fr-testing/"
-alias SCRIPTS="cd $FR_ROOT/reviewroom/scripts/"
-alias TRANS="cd $FR_ROOT/reviewroom/scripts/trans"
-alias MANAGE="cd $FR_ROOT/reviewroom/project"
-alias MAN="MANAGE"
-alias VINNYMANAGE="cd $FR_ROOT/reviewroom/vinny"
-alias BUNDLE="cd ~/.vim/bundle/"
-alias APID="cd $FR_ROOT/apps/chide/products/reviewroom/api/apiv2/"
-
-# launching django #
-alias LAUNCHRR="google-chrome http://test.myreviewroom.dev:8080/admin/dashboard/ &"
-alias LAUNCHIDT="google-chrome https://idonethis.com/cal/reviewroom-1/ &"
-alias LAUNCHRRI="google-chrome --incognito http://test.myreviewroom.dev:8080/admin/dashboard/ &"
-alias LAUNCHVIM="gvim"
-alias LAUNCHACK="gnome-terminal --title=\"ACK\" "
-alias LAUNCHSP="gnome-terminal --title=\"SHELL PLUS\" -x python2 $FR_ROOT/reviewroom/project/manage.py shell_plus"
-
-# cachepublisher DEPRECATED #
-alias LAUNCHCACHEPUBLISHER="gnome-terminal --title=\"CACHEPUB\" -x ipython2 $FR_ROOT/reviewroom/project/manage.py cachepublisher"
-alias LAUNCHCP="LAUNCHCACHEPUBLISHER"
-alias LCP="LAUNCHCP"
-
-# cachepublisher #
-alias LAUNCHJOBQUEUE="gnome-terminal --title=\"JOBQUEUE\" -x ipython2 $FR_ROOT/reviewroom/project/manage.py jobqueue"
-alias LAUNCHJQ="LAUNCHJOBQUEUE"
-alias LJQ="LAUNCHJQ"
-
-# vinny and server #
-alias LAUNCHVINNY="gnome-terminal --window-with-profile=vinny  --title=\"VINNY\" -x ipython2 $FR_ROOT/reviewroom/vinny/manage.py runserver 0.0.0.0:7077"
-alias LAUNCHSERVER="gnome-terminal --window-with-profile=server --title=\"SERVER\" -x ipython2 $FR_ROOT/reviewroom/project/manage.py runserver 0.0.0.0:8080"
-alias LAUNCHSERVERPLUS="gnome-terminal --window-with-profile=serverplus --title=\"SERVERPLUS\" -x ipython2 $FR_ROOT/reviewroom/project/manage.py runserver_plus 0.0.0.0:8080"
-alias LSRV="LAUNCHSERVER"
-alias LSRVP="LAUNCHSERVERPLUS"
-alias LAUNCHBOTH="LAUNCHSERVER; LAUNCHVINNY;"
-
-alias LAUNCHCAMPFIRE="google-chrome https://chideit.campfirenow.com/room/548608 &"
-
 alias LAUNCHGMAIL="google-chrome http://mail.chide.it &"
 
-alias MORNING="LAUNCHRR LAUNCHRRI LAUNCHACK"
-alias GOOD="LAUNCHSP; LAUNCHBOTH"
-alias RIGHT="LAUNCHCAMPFIRE LAUNCHGMAIL LAUNCHVIM "
 
-HELLO() {
-	GOOD
-	MORNING
-	RIGHT
-}
-alias LAUNCHCF=LAUNCHCAMPFIRE
-alias LB=LAUNCHBOTH
-alias LSP=LAUNCHSP
-alias LSER=LAUNCHSERVER
-alias LSERP=LAUNCHSERVERP
-# alias HELLO="LAUNCHVIM; LAUNCHACK; LSP; LAUNCHB;"
 
-# git logging #
+# git aliases
 alias LOGV="git log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate"
 alias LOGD="git log --pretty=format:'%C(yellow)%h %Cgreen%ad%Cred%d %Creset%s%Cblue [%cn]' --decorate --date=relative -n 20"
-alias LOGDJ="LOGD --author=josh"
-alias LOGDJJ="LOGD --author=josh -n5"
 alias SHOW="git show --name-only --pretty="""
-
-# git checkout branches #
-alias RRCO="git checkout josh/master"
-alias MASTER="git checkout master"
-alias STABLE="git checkout stable"
-alias SMAPPLY="git checkout josh/smapply"
-alias ERN="git checkout ernesto/smapply"
-alias APIDRF="git checkout josh/api_drf_51"
-
 alias GPR="git pull --rebase"
 
 # show current branch
 alias B="git rev-parse --abbrev-ref HEAD"
 
 # ctags
-alias CT="PRO; ctags -R --exclude=*js --exclude=*scripts*; cd -"
-
-# compilemessages with highlighting on the lang key
-alias COMPILE="./compilemessages.sh &> /tmp/temp.txt;sed -s 's/^\(\/.*locale\/\)\(.*\)\(\/LC_MESSA.*\)/\1\x1b[0;34m\2\x1b[0m\3/' /tmp/temp.txt"
-
-# testing
-alias APITASK="$FR_ROOT/reviewroom/project/manage.py test reviewroom.TaskResourceTest"
-alias APIUSER="$FR_ROOT/reviewroom/project/manage.py test reviewroom.UserResourceTest"
-alias APITEAM="$FR_ROOT/reviewroom/project/manage.py test reviewroom.TeamResourceTest"
-alias APISUB="$FR_ROOT/reviewroom/project/manage.py test reviewroom.SubmissionResourceTest"
-alias APIALL="$FR_ROOT/reviewroom/project/manage.py test reviewroom"
-alias TEST="$FR_ROOT/reviewroom/project/manage.py test chide.reviewroom"
-function TESTF() {
-	prefix='chide.reviewroom.tests.';
-	if [ "$1" ]
-	then
-		tests="$prefix$1";
-		shift
-	else
-		tests= '';
-	fi
-
-	#alternative
-	# for test in "$@"
-	# do
-	# 	tests="$tests $prefix$1";
-	# done
-	until [ -z "$1" ]
-	do
-		tests="$tests $prefix$1";
-		shift
-	done
-
-	echo $tests
-	if [ "$tests" ]
-	then
-		$FR_ROOT/reviewroom/project/manage.py test $tests;
-	fi
-}
-
-function ST() {
-	prefix='chide.products.smapply.tests.';
-	if [ "$1" ]
-	then
-		tests="$prefix$1";
-		shift
-	else
-		tests= '';
-	fi
-
-	until [ -z "$1" ]
-	do
-		tests="$tests $prefix$1";
-		shift
-	done
-
-	echo $tests
-	if [ "$tests" ]
-	then
-		$FR_ROOT/reviewroom/project/manage.py test $tests;
-	fi
-}
-
+alias CT="ctags -R --exclude=*js"
 #search helpers; ag is the_silver_searcher
 alias ag="ag -S"
 
@@ -183,14 +56,6 @@ alias GD="git diff"
 alias GP="git push"
 alias CB="git checkout -"
 
-function MIGRATE {
-	yes no | $FR_ROOT/reviewroom/project/manage.py migrate $@
-}
-# alias QUALE="echo \"Close Enough\"; QUAKE"
-# alias QUAKE="cd ~/quake3;sudo ./quake3.x86; FIXRES; cd -"
-# alias QUAKE="sudo /usr/lib/ioquake3/ioquake3; FIXRES; cd -"
-# alias Q="QUAKE"
-
 # dick moves
 alias sl="sl -ale"
 
@@ -204,28 +69,15 @@ function gvim () { (/usr/bin/gvim -f --remote-silent "$@" ) }
 alias PIP="sudo -H pip install"
 alias APT="sudo aptitude install"
 
-alias SSH="ssh joshb@192.168.176.121"
-
-alias STREAK="ipython2 ~/games/github.py streak"
-alias CONTRIB="ipython2 ~/games/github.py contribs"
-
 function PO() {
 	ag "$1" -G"$2".*po $3;
 }
 
 alias ag="ag --ignore django.po --ignore reviewroom/tree.json"
 
-alias TEDIUM="MASTER;git pull;RRCO"
-alias TED="TEDIUM"
 
 alias DOWN="cd ~/Downloads"
 
-alias DBSHELL="MANAGE;./manage.py dbshell"
-alias PACK="gnome-terminal  -x 'bash' -c 'cd $FR_ROOT/reviewroom; webpack -w'"
-
-alias MET="ipython2 ~/fr-metrics/sla/sla_viewer.py live"
-alias METC="ipython2 ~/fr-metrics/sla/sla_viewer.py from-cache"
-alias METR="ipython2 ~/fr-metrics/sla/sla_viewer.py render-html"
 
 alias FIND="find . -name"
 
