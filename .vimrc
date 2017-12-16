@@ -36,12 +36,17 @@ Plug 'https://github.com/triglav/vim-visual-increment.git'
 Plug 'https://github.com/godlygeek/tabular'
 Plug 'https://github.com/junegunn/vim-easy-align'
 Plug 'https://github.com/tpope/vim-dispatch'
+Plug 'https://github.com/vim-scripts/LargeFile'
+" Plug 'https://github.com/LucHermitte/lh-vim-lib'
+" Plug 'https://github.com/LucHermitte/vim-build-tools-wrapper'
 " Plug 'https://github.com/heaths/vim-msbuild' "not sure if this works
 Plug 'https://github.com/tpope/vim-abolish'
 " Plug 'https://github.com/rickhowe/diffchar.vim'
 Plug 'https://github.com/skywind3000/asyncrun.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" Plug 'https://github.com/vim-scripts/Conque-Shell'
+" Plug 'https://github.com/craigemery/vim-autotag' " didn't like this
 
 " snippets
 " Plug 'https://github.com/SirVer/ultisnips'
@@ -55,6 +60,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/itchyny/lightline.vim'
 
 "syntax plugins
+" Plug 'https://github.com/vim-syntastic/syntastic'
+" Plug 'https://github.com/w0rp/ale'
 Plug 'https://github.com/pangloss/vim-javascript.git'
 Plug 'git://github.com/mustache/vim-mustache-handlebars.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git'
@@ -65,6 +72,7 @@ Plug 'https://github.com/mxw/vim-jsx.git'
 Plug 'https://github.com/tikhomirov/vim-glsl'
 Plug 'https://github.com/okcompute/vim-javascript-motions'
 Plug 'https://github.com/danielroseman/pygd-vim'
+Plug 'https://github.com/udalov/kotlin-vim'
 
 Plug 'https://github.com/Konfekt/FastFold.git' "supposed to optimize non-manual folding on insert mode entry
 
@@ -160,7 +168,7 @@ set guifont=Anonymice_Powerline:h16:cANSI:qDRAFT
 
 
 " if has("gui_running")
-" 	colorscheme Monokai
+	" colorscheme Monokai
 " else
 colorscheme molokai
 " endif
@@ -209,7 +217,7 @@ let MRU_Max_Entries = 10000
 let MRU_Exclude_Files = '.*fugitiveblame.*'
 
 "hard mode for insert mode
-inoremap <Backspace> <Nop>
+" inoremap <Backspace> <Nop> "tryna make a change
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <Up> <Nop>
@@ -237,6 +245,7 @@ noremap <Leader>z :!python3 %<cr>
 noremap <Leader>z :AsyncRun python3 %<cr>
 noremap <Leader><Leader>z :!ipython3 %<cr>
 noremap <Leader><Leader>z :AsyncRun ipython3 %<cr>
+noremap <Leader><Leader>c :Dispatch ctags -R --c++-kinds=+p --fields=+iaS --extra=+q Classes/*<CR>
 
 noremap <Leader>c :e $MYVIMRC<cr>
 noremap <Leader>a :CtrlPMRUFiles<cr>
@@ -253,15 +262,17 @@ noremap <Leader>to :tabo<cr>
 nnoremap <Leader>fe :CtrlP ~\AppData\Local\buildupthebase\<cr>
 nnoremap <Leader>fb :e ~\AppData\Local\buildupthebase\UserDefault.xml<cr>
 nnoremap <Leader>fa :e ~\Documents\cocos_projects\basebuilder\proj.android\jni\Android.mk<cr>
-nnoremap <Leader>ft :e ~\Documents\cocos_projects\basebuilder\todo.txt<cr>
+nnoremap <Leader>ft :e ~\Documents\cocos_projects\basebuilder\todo.md<cr>
 nnoremap <Leader>fx :e ~\Documents\cocos_projects\basebuilder\proj.android\AndroidManifest.xml<cr>
 
-nnoremap <Leader>w :Make<cr>
-nnoremap <Leader>r :Copen<cr>
+nnoremap <silent> <Leader>w :Make<cr>
+nnoremap <silent> <Leader>r :Copen<cr>
 
 " fugitive stuff
-nnoremap <Leader>gs :Gstatus<cr>
-nnoremap <Leader>gb :Gblame<cr>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gc :Gcommit -m "
+nnoremap <Leader>gw :Gw<CR>
 
 " filetypes
 nnoremap <Leader>ffh :set filetype=html<cr>
@@ -490,7 +501,7 @@ cmap w!! w !sudo tee > /dev/null %<cr>
 "open docx as zip
 au BufReadCmd *.jar,*.xpi,*.docx,*.doc call zip#Browse(expand("<amatch>"))
 
-set timeoutlen=3000
+set timeoutlen=500
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 
@@ -622,3 +633,18 @@ let g:cpp_class_decl_highlight = 1
 let g:surround_no_insert_mappings = 1
 
 set shellslash
+
+" let g:syntastic_kotlin_checkers = ['kotlinc']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" close quickfix with q after returning to last window
+autocmd BufWinEnter quickfix nnoremap <silent> <buffer> q <C-W><C-P>:cclose<cr>:lclose<cr>
+
+source ~/.vimrc_functions
