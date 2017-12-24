@@ -1,10 +1,7 @@
 filetype off
 set nocompatible
 
-" " " "pathogen "  "  "
-" call pathogen#infect()
-" call pathogen#helptags()
-"
+
 " " " "vim-plug "  "  "
 call plug#begin('~/.vim/plugged')
 
