@@ -1,83 +1,8 @@
 filetype off
 set nocompatible
 
-
-" " " "vim-plug "  "  "
-call plug#begin('~/.vim/plugged')
-
-Plug 'https://github.com/tpope/vim-repeat.git'
-Plug 'https://github.com/stefandtw/quickfix-reflector.vim.git'
-Plug 'https://github.com/takac/vim-hardtime.git'
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-Plug 'https://github.com/nixprime/cpsm.git'
-" Plug 'https://github.com/tmhedberg/matchit.git' "replaced with matchup
-Plug 'https://github.com/andymass/vim-matchup'
-" Plug 'https://github.com/junegunn/fzf.vim.git'
-Plug 'https://github.com/mileszs/ack.vim.git'
-Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'https://github.com/wellle/targets.vim'
-Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/tomtom/tcomment_vim.git'
-Plug 'https://github.com/terryma/vim-multiple-cursors.git'
-Plug 'https://github.com/majutsushi/tagbar.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/vim-scripts/mru.vim.git'
-Plug 'https://github.com/flazz/vim-colorschemes.git'
-Plug 'https://github.com/powerline/fonts.git'
-Plug 'https://github.com/luochen1990/rainbow.git'
-Plug 'https://github.com/sjl/gundo.vim.git'
-Plug 'https://github.com/AndrewRadev/switch.vim.git'
-Plug 'https://github.com/statox/vim-compare-lines'
-Plug 'https://github.com/ntpeters/vim-better-whitespace'
-Plug 'https://github.com/triglav/vim-visual-increment.git'
-Plug 'https://github.com/godlygeek/tabular'
-Plug 'https://github.com/junegunn/vim-easy-align'
-Plug 'https://github.com/tpope/vim-dispatch'
-Plug 'https://github.com/vim-scripts/LargeFile'
-" Plug 'https://github.com/LucHermitte/lh-vim-lib'
-" Plug 'https://github.com/LucHermitte/vim-build-tools-wrapper'
-" Plug 'https://github.com/heaths/vim-msbuild' "not sure if this works
-Plug 'https://github.com/tpope/vim-abolish'
-" Plug 'https://github.com/rickhowe/diffchar.vim'
-Plug 'https://github.com/skywind3000/asyncrun.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" Plug 'https://github.com/vim-scripts/Conque-Shell'
-" Plug 'https://github.com/craigemery/vim-autotag' " didn't like this
-
-" snippets
-" Plug 'https://github.com/SirVer/ultisnips'
-" ES2015 code snippets (Optional)
-" Plug 'epilande/vim-es2015-snippets'
-" React code snippets
-" Plug 'epilande/vim-react-snippets'
-
-" Plug 'https://github.com/vim-airline/vim-airline.git' "performance hit for using this
-" Plug 'https://github.com/vim-airline/vim-airline-themes'
-Plug 'https://github.com/itchyny/lightline.vim'
-
-"syntax plugins
-" Plug 'https://github.com/vim-syntastic/syntastic'
-" Plug 'https://github.com/w0rp/ale'
-Plug 'https://github.com/pangloss/vim-javascript.git'
-Plug 'git://github.com/mustache/vim-mustache-handlebars.git'
-Plug 'https://github.com/kchmck/vim-coffee-script.git'
-Plug 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
-Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
-Plug 'https://github.com/PProvost/vim-ps1.git'
-Plug 'https://github.com/mxw/vim-jsx.git'
-Plug 'https://github.com/tikhomirov/vim-glsl'
-Plug 'https://github.com/okcompute/vim-javascript-motions'
-Plug 'https://github.com/danielroseman/pygd-vim'
-Plug 'https://github.com/udalov/kotlin-vim'
-
-Plug 'https://github.com/Konfekt/FastFold.git' "supposed to optimize non-manual folding on insert mode entry
-
-" Plug 'mattn/emmet-vim' "doesnt work with mustache well
-" Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git' "eff this
-"
-" Add plugins to &runtimepath
-call plug#end()
+" loads plugins inside, so I can just re-source this file
+source ~/.vim/plugins_to_load.vim
 
 " changes it so the mouse starts Visual mode not Select mode
 set selectmode="key"
@@ -88,8 +13,19 @@ noremap Y y$
 
 
 set synmaxcol=300
+
 "python-mode stuff
-" let g:pymode_lint_write = 0
+let g:pymode_lint_write = 0
+let g:pymode_lint_on_write = 0
+let g:pymode_python = 'python3'
+let g:pymode_run_bind = '<leader>q'
+
+"Indent after an open paren: >
+let g:pyindent_open_paren = '&sw'
+"Indent after a nested paren: >
+let g:pyindent_nested_paren = '&sw'
+"Indent for a continuation line: >
+let g:pyindent_continue = '&sw'
 
 set incsearch
 
@@ -108,7 +44,6 @@ set ignorecase
 set smartcase
 set noinfercase "default off im pretty sure
 set gdefault
-" set nohlsearch
 set hlsearch
 set visualbell
 
@@ -148,7 +83,7 @@ set history=10000
 set undolevels=10000
 
 "ignores certain files for tab completion
-set wildignore=*.swp,*.png,*.cd,*.ico,*.jpg,*.ico,*.cs~,*.txt~,*.py~,*\\cocos\\*
+set wildignore=*.swp,*.png,*.cd,*.ico,*.jpg,*.ico,*.cs~,*.txt~,*.py~
 "
 " Allows for having files offscreen without saving first
 set hidden
@@ -160,7 +95,8 @@ set wildmenu
 " set guifont=Monospace\ 14 "dont have this on windows yet
 "set guifont=Inconsolata\ for\ Powerline\ 18
 " set guifont=DejaVu_Sans_Mono_for_Powerline:h14:cANSI:qDRAFT
-set guifont=Anonymice_Powerline:h16:cANSI:qDRAFT
+" set guifont=Anonymice_Powerline:h16:cANSI:qDRAFT
+set guifont=Droid_Sans_Mono_Slashed_for_Pow:h14:cANSI:qDRAFT
 
 
 
@@ -190,6 +126,9 @@ let Tlist_Use_Horiz_Window=0
 nnoremap TT :TagbarToggle<CR>
 map <F4> :TagbarToggle<CR>
 
+" don't open help with F1
+nmap <F1> :echo "F1 to see help disabled in my vimrc"<CR>
+
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_autoshowtag = 1
@@ -208,6 +147,7 @@ let Tlist_WinWidth = 40
 " NERDtree stuff
 let NERDTreeIgnore=['\.jpg$','\.png$','\.ico$','\.csproj$', '\.user$', '\.cachefile$','\.cd$','\.jpeg$',   '\.pyc$', '\~$']
 noremap <f3> :NERDTreeToggle<cr>
+noremap <S-f3> :NERDTreeToggle %:p<cr>
 
 " MRU plugin
 let MRU_Max_Entries = 10000
@@ -220,11 +160,14 @@ noremap <Right> <Nop>
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 inoremap <c-b> <Del>
+"no newline with ctrl-m in insert mode, but can't because it's an exact(?) equivalent to <CR>
+" inoremap <c-m> <Nop>
 
 inoremap <c-C> <Esc>
 vnoremap <c-C> <Esc>
 nnoremap <c-C> <Esc>
-inoremap jk <Esc>
+" i hated this
+" inoremap jk <Esc>
 
 
 "change leader key
@@ -238,13 +181,20 @@ noremap <Leader>p :bp<cr>
 noremap <Leader>l :ls<cr>
 
 "map keys for running current file in Python
-noremap <Leader>z :!python3 %<cr>
-noremap <Leader>z :AsyncRun python3 %<cr>
-noremap <Leader><Leader>z :!ipython3 %<cr>
-noremap <Leader><Leader>z :AsyncRun ipython3 %<cr>
-noremap <Leader><Leader>c :Dispatch ctags -R --c++-kinds=+p --fields=+iaS --extra=+q Classes/*<CR>
+" noremap <Leader>z :!python3 %<cr>
+noremap <Leader>z :AsyncStop \| sleep 50ms \| AsyncRun python3 %<cr>
+noremap <Leader>x :AsyncStop<cr>
+" noremap <Leader><Leader>z :!ipython3 %<cr>
+noremap <Leader><Leader>z :AsyncStop \| sleep 250ms \| AsyncRun ipython3 %<cr>
+noremap <Leader><Leader>c :Dispatch! ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --exclude=Classes/steam_sdk* --exclude=Classes/reader* --exclude=Classes/magic_particles Classes/*<CR>
+
+noremap <Leader><Leader>a :AsyncStop \| sleep 250ms \| AsyncRun ipython3 C:\Users\Josh\Documents\cocos_projects\magnolia\gui_magnolia.py<cr>
+noremap <Leader><Leader>q :AsyncStop \| sleep 250ms \| AsyncRun ipython3 C:\Users\Josh\Documents\cocos_projects\magnolia\magnolia.py<cr>
+noremap <Leader><Leader>t :AsyncStop \| sleep 250ms \| AsyncRun ipython3 C:\Users\Josh\Documents\cocos_projects\magnolia\test_magnolia.py<cr>
+let g:asyncrun_open = 8
 
 noremap <Leader>c :e $MYVIMRC<cr>
+noremap <Leader>C :e ~/.vim/plugins_to_load.vim<cr>
 noremap <Leader>a :CtrlPMRUFiles<cr>
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " noremap <Leader>a :MRU<cr>
@@ -256,20 +206,16 @@ noremap <Leader>tc :tabc<cr>
 noremap <Leader>te :tabe<cr>
 noremap <Leader>to :tabo<cr>
 
-nnoremap <Leader>fe :CtrlP ~\AppData\Local\buildupthebase\<cr>
-nnoremap <Leader>fb :e ~\AppData\Local\buildupthebase\UserDefault.xml<cr>
-nnoremap <Leader>fa :e ~\Documents\cocos_projects\basebuilder\proj.android\jni\Android.mk<cr>
-nnoremap <Leader>ft :e ~\Documents\cocos_projects\basebuilder\todo.md<cr>
-nnoremap <Leader>fx :e ~\Documents\cocos_projects\basebuilder\proj.android\AndroidManifest.xml<cr>
-
 nnoremap <silent> <Leader>w :Make<cr>
 nnoremap <silent> <Leader>r :Copen<cr>
 
 " fugitive stuff
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gac :Gcommit -am "
 nnoremap <Leader>gc :Gcommit -m "
-nnoremap <Leader>gw :Gw<CR>
+nnoremap <Leader>gw :silent Git add %<CR>
 
 " filetypes
 nnoremap <Leader>ffh :set filetype=html<cr>
@@ -277,15 +223,30 @@ nnoremap <Leader>ffj :set filetype=javascript<cr>
 nnoremap <Leader>ffp :set filetype=python<cr>
 nnoremap <Leader>ffx :set filetype=xml<cr>
 nnoremap <Leader>fff :set filetype=<cr>
+nnoremap <Leader>ffc :set filetype=cpp<cr>
 
-nnoremap <Leader>x :% !xmllint.exe "%" --format
+" nnoremap <Leader>x :% !xmllint.exe "%" --format
+" nnoremap <Leader>x :% !xmllint.exe "%" --format
+
+"vim-ripgrep setup
+let g:rg_binary = 'C:/tools/rg.exe'
+let g:rg_highlight = 1
+let g:rg_derive_root = 1
+let g:rg_highlight_type = 'identifier'
 
 nnoremap <Leader>s :Ack!<Space>
+" nnoremap <Leader>sw :Ack! <C-R><C-W> Classes/<Space>
+" nnoremap <Leader>sw :Ack -Gmagnolia.*js -i  <C-R><C-W>
+" nnoremap <Leader>sw :Ack -Gmagnolia -i  <C-R><C-W>
+nnoremap <Leader>sw :Ack <C-R><C-W>
 let g:ackprg = 'ag --vimgrep --smart-case'
+" let g:ackprg = 'rg --vimgrep --smart-case' "idk why !rg can't be found, while rg can in cmd
+" let g:ackprg = 'C:/tools/rg' " wouldnt work in system32, so i moved it
 " cnoreabbrev ag Ack
 " cnoreabbrev aG Ack
 " cnoreabbrev Ag Ack
 " cnoreabbrev AG Ack
+" let g:ag_working_path_mode="r"
 
 " add template paths for gf completing
 " set path+=~/chideit/apps/chide/products/smapply/templates/
@@ -305,7 +266,8 @@ noremap <c-y> <c-y>
 set cmdheight=2
 
 " 3 lines of margin before the screen scrolls, default 0
-set scrolloff=3
+" set scrolloff=3
+let g:scrolloff_fraction = 0.10
 
 
 " sets spell on if it's a .txt file
@@ -413,6 +375,18 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 " let g:airline#extensions#tabline#show_buffers = 1
 " let g:airline#extensions#tabline#buffer_idx_mode = 1
+set noshowmode "lightline shows it anyway
+
+
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 " Just filename in the tabline
 " let g:airline#extensions#tabline#fnamemod = ':t'
@@ -448,26 +422,34 @@ let g:ctrlp_lazy_update = 0 "200 350 0
 " let g:ctrlp_user_command = "ack --ignore-dir=raw --ignore-dir=cocos2d -f %s"
 let g:ctrlp_max_files = 1000000
 let g:ctrlp_max_history = 1000000
+let g:ctrlp_mruf_max = 25000
+let g:ctrlp_mruf_default_order = 1
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_switch_buffer = '' "disable switching
 let g:ctrlp_clear_cache_on_exit = 0
 
-let g:ctrlp_user_command = 'ag -l --ignore-dir=cocos2d --nocolor -g "" %s'
+let g:ctrlp_user_command = 'ag -l --ignore-dir=cocos2d* --nocolor -g "" %s'
+let g:ctrlp_prompt_mappings = {
+            \ 'ToggleFocus()':        ['<c-space>'],
+            \ }
 
 nnoremap <C-\> :CtrlPBuffer<CR>
+nnoremap <Leader>p :CtrlPCurWD<CR>
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'} " this doesnt work on  new install for some reason, returns 0
 
 
 set noexpandtab
 
-if has("win32")
-    cd ~\Documents\cocos_projects\basebuilder\
-else
-    cd ~/Documents/cocos_projects/basebuilder/
-endif
+" if has("win32")
+"     cd ~\Documents\cocos_projects\magnolia_cocos\
+" else
+"     cd ~/Documents/cocos_projects/basebuilder/
+" endif
 
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
-			\ exe "normal g'\"" | endif
+" returns to last position in file. pretty sure this was messing with my
+"  positions though, so I'm disabling it
+" au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+" 			\ exe "normal g'\"" | endif
 
 
 " " go to defn of tag under the cursor | makes go to tagging CaseSensitive
@@ -492,12 +474,14 @@ set showcmd
 
 let g:ctrlp_custom_ignore = ".*\/c\/.*\|.*.pyc$\|.*boost.*\|.*fsmobile.*$"
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %<cr>
+" Allow saving of files as sudo when I forgot to start vim using sudo. doesn't work in windows though
+" cmap w!! w !sudo tee > /dev/null %<cr>
 
 "open docx as zip
 au BufReadCmd *.jar,*.xpi,*.docx,*.doc call zip#Browse(expand("<amatch>"))
 
+" time delay before a key is decided to be the last one, default 1000, then I
+" had it set to 1500 for some reason
 set timeoutlen=500
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
@@ -516,7 +500,7 @@ nnoremap <Leader>gt :GundoToggle<cr>
 
 let g:multi_cursor_quit_key='<C-c>'
 
-nnoremap <Leader>qo :copen<cr>
+nnoremap <Leader>qo :copen5<cr>
 nnoremap <Leader>qc :cclose<cr>
 
 set mouse=
@@ -530,7 +514,7 @@ let g:ftplugin_sql_omni_key = '<C-\>'
 
 
 " search current word with :Ag!
-nnoremap <Leader><Leader>a :Ag! <c-r><c-w><CR>
+" nnoremap <Leader><Leader>a :Ag! <c-r><c-w><CR>
 
 " setting toggles
 nnoremap <Leader><Leader>sl :set list!<CR>
@@ -553,19 +537,25 @@ autocmd FileType Help :HardTimeOff
 " " fzf
 " set rtp+=~/.fzf
 "
-" " Mapping selecting mappings
+" Mapping selecting mappings
 " nmap <leader><tab> <plug>(fzf-maps-n)
 " xmap <leader><tab> <plug>(fzf-maps-x)
 " omap <leader><tab> <plug>(fzf-maps-o)
-"
+" "
 " " Insert mode completion
 " imap <c-x><c-k> <plug>(fzf-complete-word)
 " imap <c-x><c-f> <plug>(fzf-complete-path)
 " imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 " imap <c-x><c-l> <plug>(fzf-complete-line)
+" "
+" " " Advanced customization using autoload functions
+" " inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 "
-" " Advanced customization using autoload functions
-" inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+" " FZF with gitignore respecting
+" nnoremap <leader>gp :GFiles --cached --others --exclude-standard<CR>
+"
+" "disable preview, since windows doesnt have preview.sh support
+" let g:fzf_preview_window = ''
 
 " sweet django debugging prints
 " import time; from inspect import currentframe, getframeinfo; from django.db import connection; _START_TIME = time.time();_TOTAL_TIME = 0; _TOTAL_QUERIES = len(connection.queries); _LAST_TIME = [time.time()]; _LAST_QUERIES = [0]
@@ -574,10 +564,15 @@ autocmd FileType Help :HardTimeOff
 
 " rainbow parenthesis
 let g:rainbow_active = 1
+let g:rainbow_conf = {
+\	'separately': {
+\		'vimwiki': 0,
+\	}
+\}
 
 " SexyScroller
-let g:SexyScroller_ScrollTime = 1
-let g:SexyScroller_MaxTime = 50
+" let g:SexyScroller_ScrollTime = 1
+" let g:SexyScroller_MaxTime = 50
 
 function! TabMessage(cmd)
   redir => message
@@ -597,8 +592,10 @@ command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 nnoremap <Space>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 set backspace=indent,eol,start
 
-set formatoptions-=o
-set formatoptions-=c
+" set formatoptions-=o
+" set formatoptions-=c
+" don't auto comment new lines automatically
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
 " add jsx for leagion
 set path+=assets\js\
@@ -611,7 +608,9 @@ let g:python_recommended_style=0
 nnoremap <Leader>tt :!python3 C:\Users\Josh\Documents\cocos_projects\leagion\manage.py test leagion.tests<CR>
 
 " basebuilder specifics
-set makeprg=msbuild\ /nologo\ /v:q\ /t:buildupthebase\ proj.win32/buildupthebase.sln
+" set makeprg=msbuild\ /nologo\ /v:q\ /t:buildupthebase\ proj.win32/buildupthebase.sln
+" set makeprg=msbuild\ /nologo\ /v:q\ /t:roguebreaker_proj\ proj.win32/roguebreaker_sln.sln
+
 
 
 " set filetype for cocos2d cocos studio files
@@ -624,12 +623,15 @@ abbr stca static_cast
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
+" let g:cpp_experimental_simple_template_highlight = 1
 " let g:cpp_experimental_template_highlight = 1
+" let g:cpp_concepts_highlight = 1
+
 
 " vim-surround
 let g:surround_no_insert_mappings = 1
 
-set shellslash
+" set shellslash " not sure what I needed this for
 
 " let g:syntastic_kotlin_checkers = ['kotlinc']
 " set statusline+=%#warningmsg#
@@ -641,7 +643,87 @@ set shellslash
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
+" mucomplete
+" set completeopt+=menuone
+" inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+" inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+" inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+" set completeopt+=noselect
+" set completeopt+=noinsert
+
+let g:scroll_off_fraction = 0.15
+
 " close quickfix with q after returning to last window
 autocmd BufWinEnter quickfix nnoremap <silent> <buffer> q <C-W><C-P>:cclose<cr>:lclose<cr>
 
+" disable backups because it only seems to be causing problems
+set backupdir=~/.vim/backups
+set nobackup
+set nowritebackup
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+let g:csv_table_leftalign=1
+
+let g:vim_json_syntax_conceal = 0
+
 source ~/.vimrc_functions
+"change to magnolia cocos when vim boots without drawing messagebox
+autocmd VimEnter * call MAGNOLIA_COCOS()
+" set pythondll=C:/Python27/python.dll
+" set pythonthreedll=C:/Users/Josh/AppData/Local/Programs/Python/Python36-32/python36.dll
+
+
+" default vimwiki mapping prefix
+let g:vimwiki_map_prefix = '<Leader><Leader>w'
+let g:vimwiki_list = [{
+    \'path': '~/.vim/vimwiki/',
+    \'syntax': 'markdown',
+    \'ext': '.md',
+    \'auto_diary_index': 1
+\}]
+" let g:vimwiki_folding='list' "enable folding in vimwiki
+
+nmap <Leader><Leader>n :VimwikiDiaryNextDay<cr>
+nmap <Leader><Leader>p :VimwikiDiaryPrevDay<cr>
+
+" make Rooter stop changing cwd automatically
+" let g:rooter_manual_only = 1
+
+" cursors in terminal mode (i think)
+" let &t_SI = "\<esc>[5 q"  " blinking I-beam in insert mode
+" let &t_SR = "\<esc>[3 q"  " blinking underline in replace mode
+" let &t_EI = "\<esc>[ q"  " default cursor (usually blinking block) otherwise
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" optional reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+
+
+" disable g< and g> for TComment because I don't want to mess with them, ZXC
+" is just a keystroke I can't imagine needing, so it works as a throwaway
+let g:tcomment_mapleader_uncomment_anyway= 'ZXC'
+let g:tcomment_mapleader_comment_anyway = 'ZXC'
+
+" remap :Q to :q
+command! Q :q
+
+
+"haskell-vim plugin configure
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
