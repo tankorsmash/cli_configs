@@ -182,7 +182,8 @@ noremap <Leader>l :ls<cr>
 
 "map keys for running current file in Python
 " noremap <Leader>z :!python3 %<cr>
-noremap <Leader>z :AsyncStop \| sleep 50ms \| AsyncRun python3 %<cr>
+" noremap <Leader>z :AsyncStop \| sleep 150ms \| AsyncRun python3 %<cr>
+noremap <Leader>z :AsyncStop \| sleep 150ms \| AsyncRun python39 -m portfolio.scanner_gui<cr>
 noremap <Leader>x :AsyncStop<cr>
 " noremap <Leader><Leader>z :!ipython3 %<cr>
 noremap <Leader><Leader>z :AsyncStop \| sleep 250ms \| AsyncRun ipython3 %<cr>
@@ -727,3 +728,15 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'cpp']
+" let g:vimwiki_folding='expr'
+
+" disable formatting on autosave
+let g:zig_fmt_autosave = 0
+
+let FYT_flash_time = 100
+
+" close all but current buffers
+nmap <leader>o :%bd\|e#\|bd#<cr>
