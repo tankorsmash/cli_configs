@@ -6,7 +6,7 @@ Plug 'https://github.com/takac/vim-hardtime.git'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/nixprime/cpsm.git'
 " Plug 'https://github.com/tmhedberg/matchit.git' "replaced with matchup
-" Plug 'https://github.com/andymass/vim-matchup'
+Plug 'https://github.com/andymass/vim-matchup'
 Plug 'https://github.com/mileszs/ack.vim.git'
 Plug 'https://github.com/jremmen/vim-ripgrep'
 Plug 'https://github.com/scrooloose/nerdtree.git'
@@ -48,6 +48,8 @@ Plug 'https://github.com/skywind3000/asyncrun.vim'
 " Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/drzel/vim-scroll-off-fraction'
 Plug 'https://github.com/vimwiki/vimwiki', {'tag': 'dev'}
+Plug 'rhysd/git-messenger.vim'
+" Plug 'https://github.com/statox/FYT.vim'
 
 " snippets
 " Plug 'https://github.com/SirVer/ultisnips'
@@ -89,6 +91,11 @@ Plug 'https://github.com/rust-lang/rust.vim'
 Plug 'chaiscript/vim-chaiscript'
 Plug 'https://github.com/neovimhaskell/haskell-vim'
 Plug 'https://github.com/aiya000/vim-ghcid-quickfix'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'https://github.com/chrisbra/csv.vim'
+Plug 'https://github.com/vobornik/vim-mql4'
+Plug 'https://github.com/ziglang/zig.vim'
+" Plug 'https://github.com/vim-scripts/MediaWiki-folding-and-syntax-highlight' "makes things too white and doesnt seem to work
 
 " JS imports support
 " Plug 'ludovicchabant/vim-gutentags'
